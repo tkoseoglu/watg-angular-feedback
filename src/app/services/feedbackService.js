@@ -5,8 +5,8 @@
 feedbackModule.factory('feedbackService', function ($http, $log, $q, $rootScope) {
 
     return {
-        //feedback
-        getProjectDetails: function (projectName, url) {
+        getProjectDetails: function (url) {
+            console.log(url);
             return $http({
                 method: 'GET',
                 withCredentials: true,
@@ -16,8 +16,9 @@ feedbackModule.factory('feedbackService', function ($http, $log, $q, $rootScope)
                     return response.data;
                 });
         },
-        //POST
         addProjectFeedback: function (vm, url) {
+            console.log(vm);
+            console.log(url);
             return $http({
                 method: 'POST',
                 data: $.param(vm),

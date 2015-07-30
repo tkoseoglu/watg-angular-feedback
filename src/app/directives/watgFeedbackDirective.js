@@ -1,16 +1,12 @@
 /**
  * Created by Kemal on 07/30/15.
  */
-feedbackModule.directive("watgFeedback", function () {
-
-
+feedbackModule.directive("watgFeedback", function (feedbackService) {
     var controller = ['$scope', function ($scope) {
 
         $scope.header = 'Feedback';
-        $scope.projectName = 'eMail Campaign App';
         $scope.isBusySubmittingFeedback = false;
         $scope.showConfirmation = false;
-
         $scope.form = {};
         $scope.feedbackItem = {
             feedback: '',
@@ -24,23 +20,20 @@ feedbackModule.directive("watgFeedback", function () {
             screenResolution: '',
             rating: null
         }
+        $scope.max = 5;
+        $scope.stars = [];
+        $scope.ratingValue = 3;
 
         $scope.getProjectDetails = function () {
             $scope.isBusy = true;
-
-            /* appService.getProjectDetails($scope.projectName).then(function (result) {
-             $scope.feedbackItem.applicationId = result.Id;
-             $scope.feedbackItem.applicationName = result.ProjectName;
-             $scope.feedbackItem.applicationDescription = result.ProjectDescription;
-             $scope.feedbackItem.applicationVersion = result.Version;
-             $scope.isBusy = false;
-             });*/
-
-            $scope.isBusy = false;
-
+            feedbackService.getProjectDetails($scope.getUrl + '/' + $scope.projectName).then(function (result) {
+                $scope.feedbackItem.applicationId = result.Id;
+                $scope.feedbackItem.applicationName = result.ProjectName;
+                $scope.feedbackItem.applicationDescription = result.ProjectDescription;
+                $scope.feedbackItem.applicationVersion = result.Version;
+                $scope.isBusy = false;
+            });
         };
-        $scope.getProjectDetails();
-
         $scope.submitFeedback = function () {
 
             $scope.isBusySubmittingFeedback = true;
@@ -51,29 +44,15 @@ feedbackModule.directive("watgFeedback", function () {
             $scope.feedbackItem.screenResolution = screen.width + '*' + screen.height;
             $scope.feedbackItem.rating = $scope.ratingValue;
 
-            /* appService.addProjectFeedback($scope.feedbackItem).then(function (result) {
+            feedbackService.addProjectFeedback($scope.feedbackItem, $scope.submitUrl).then(function (result) {
 
-             var transactionResult = result;
+                console.log(result);
+                var transactionResult = result;
+                $scope.showConfirmation = true;
+                $scope.isBusySubmittingFeedback = false;
 
-             if (transactionResult.HasError === true) {
-             toastr.error("Error submitting feedback", transactionResult.Message);
-             }
-             else {
-             toastr.success("Feedback submitted");
-             $scope.showConfirmation = true;
-             }
-
-             $scope.isBusySubmittingFeedback = false;
-
-             });*/
+            });
         };
-
-        //rating
-
-        $scope.max = 5;
-        $scope.stars = [];
-        $scope.ratingValue = 3;
-
         $scope.toggle = function (index) {
             $scope.ratingValue = index + 1;
         };
@@ -91,22 +70,25 @@ feedbackModule.directive("watgFeedback", function () {
                 });
             }
         };
+
+
+        $scope.getProjectDetails();
     }];
-
-
     return {
         restrict: 'E',
         templateUrl: 'app/templates/feedbackTemplate.html',
         scope: {
             projectName: '=',
-            serviceUrl: '=',
+            getUrl: '=',
+            submitUrl: '=',
             userFullName: '='
         },
         controller: controller,
         link: function (scope, element) {
 
             console.log(scope.projectName);
-            console.log(scope.serviceUrl);
+            console.log(scope.getUrl);
+            console.log(scope.submitUrl);
             console.log(scope.userFullName);
 
         }
