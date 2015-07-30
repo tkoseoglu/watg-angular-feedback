@@ -1,7 +1,7 @@
 /**
  * Created by Kemal on 07/30/15.
  */
-var feedbackModule = angular.module('feedbackModule', ['ngRoute', 'ngSanitize'])
+var watgFeedbackModule = angular.module('watgFeedback', ['ngRoute', 'ngSanitize'])
     .config(function ($routeProvider, $httpProvider) {
 
         $httpProvider.defaults.useXDomain = true;

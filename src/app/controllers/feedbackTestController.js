@@ -1,6 +1,6 @@
 "use strict";
-feedbackModule.controller('feedbackController',
-    function feedbackController($scope, feedbackService) {
+watgFeedbackModule.controller('feedbackTestController',
+    function feedbackTestController($scope) {
         $scope.header = 'Feedback';
 
         $scope.projectName = "eMail Campaign App";

@@ -1,7 +1,7 @@
 /**
  * Created by Kemal on 07/30/15.
  */
-var feedbackModule = angular.module('feedbackModule', ['ngRoute', 'ngSanitize'])
+var watgFeedbackModule = angular.module('watgFeedback', ['ngRoute', 'ngSanitize'])
     .config(function ($routeProvider, $httpProvider) {
 
         $httpProvider.defaults.useXDomain = true;
@@ -18,8 +18,8 @@ var feedbackModule = angular.module('feedbackModule', ['ngRoute', 'ngSanitize'])
     });
 
 "use strict";
-feedbackModule.controller('feedbackController',
-    function feedbackController($scope, feedbackService) {
+watgFeedbackModule.controller('feedbackTestController',
+    function feedbackTestController($scope) {
         $scope.header = 'Feedback';
 
         $scope.projectName = "eMail Campaign App";
@@ -34,7 +34,7 @@ feedbackModule.controller('feedbackController',
 /**
  * Created by Kemal on 07/30/15.
  */
-feedbackModule.directive("watgFeedback", function (feedbackService) {
+watgFeedbackModule.directive("watgFeedback", function (feedbackService) {
     var controller = ['$scope', function ($scope) {
 
         $scope.header = 'Feedback';
@@ -132,7 +132,7 @@ feedbackModule.directive("watgFeedback", function (feedbackService) {
  * Created by Kemal on 07/30/15.
  */
 'use strict';
-feedbackModule.factory('feedbackService', function ($http, $log, $q, $rootScope) {
+watgFeedbackModule.factory('feedbackService', function ($http, $log, $q, $rootScope) {
 
     return {
         getProjectDetails: function (url) {

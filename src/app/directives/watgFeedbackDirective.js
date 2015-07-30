@@ -1,7 +1,7 @@
 /**
  * Created by Kemal on 07/30/15.
  */
-feedbackModule.directive("watgFeedback", function (feedbackService) {
+watgFeedbackModule.directive("watgFeedback", function (feedbackService) {
     var controller = ['$scope', function ($scope) {
 
         $scope.header = 'Feedback';
