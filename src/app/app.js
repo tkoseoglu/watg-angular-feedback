@@ -12,7 +12,7 @@ var watgFeedbackModule = angular.module('watgFeedback', ['ngRoute', 'ngSanitize'
             .when('/',
             {
                 templateUrl: 'app/views/feedbackView.html',
-                controller: 'feedbackController'
+                controller: 'feedbackTestController'
             })
             .otherwise({redirectTo: '/'});
     });

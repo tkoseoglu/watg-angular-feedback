@@ -12,7 +12,7 @@ var watgFeedbackModule = angular.module('watgFeedback', ['ngRoute', 'ngSanitize'
             .when('/',
             {
                 templateUrl: 'app/views/feedbackView.html',
-                controller: 'feedbackController'
+                controller: 'feedbackTestController'
             })
             .otherwise({redirectTo: '/'});
     });
@@ -21,6 +21,7 @@ var watgFeedbackModule = angular.module('watgFeedback', ['ngRoute', 'ngSanitize'
 watgFeedbackModule.controller('feedbackTestController',
     function feedbackTestController($scope) {
         $scope.header = 'Feedback';
+
 
         $scope.projectName = "eMail Campaign App";
         $scope.getProjectDetailsUrl = 'http://itstage.watg.com/watgxapirest/api/Feedback/GetProjectDetails/';

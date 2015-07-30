@@ -5,6 +5,7 @@
   "authors": [
     "Tolga <tkoseoglu@live.com>"
   ],
+  "main": "./dist/js/watg-angular-feedback.min.js",
   "description": "angularjs feedback module for WATG",
   "license": "MIT",
   "ignore": [
