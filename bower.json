@@ -1,0 +1,17 @@
+{
+  "name": "watg-angular-feedback",
+  "version": "0.0.1",
+  "homepage": "https://github.com/tkoseoglu/watg-angular-feedback",
+  "authors": [
+    "Tolga <tkoseoglu@live.com>"
+  ],
+  "description": "angularjs feedback module for WATG",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
