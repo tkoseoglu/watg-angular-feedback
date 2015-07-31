@@ -24,8 +24,9 @@
     }
 
     .feedbackMainContent {
-        margin-left: 10px;
-        margin-right: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
+        overflow-x: hidden;
     }
 </style>
 
@@ -49,7 +50,7 @@
             </div>
             <div class="form-group"
                  ng-class="{'has-error': form.inputForm.message.$invalid}">
-                <label>Feedback from {{userName}}</label>
+                <label>Feedback from {{user.FullName}}</label>
                 <textarea name="message"
                           class="form-control"
                           rows="4"
