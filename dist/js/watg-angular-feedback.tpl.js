@@ -1,7 +1,7 @@
-angular.module('templates-main', ['app/templates/feedbackTemplate.html']);
+angular.module('templates-main', ['app/directives/feedbackTemplate.html']);
 
-angular.module("app/templates/feedbackTemplate.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("app/templates/feedbackTemplate.html",
+angular.module("app/directives/feedbackTemplate.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("app/directives/feedbackTemplate.html",
     "<style>\n" +
     "    .star-rating {\n" +
     "        margin: 0;\n" +

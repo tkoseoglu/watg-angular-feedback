@@ -119,7 +119,7 @@ module.exports = function (grunt) {
                 // custom options, see below
             },
             main: {
-                src: ['src/app/templates/*.html'],
+                src: ['src/app/directives/*.html'],
                 dest: 'dist/js/watg-angular-feedback.tpl.js'
             }
         }
