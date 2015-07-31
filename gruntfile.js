@@ -113,18 +113,27 @@ module.exports = function (grunt) {
                     }
                 ]
             },
+        },
+        html2js: {
+            options: {
+                // custom options, see below
+            },
+            main: {
+                src: ['src/app/templates/*.html'],
+                dest: 'dist/tmp/templates.js'
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-concat-css');
-
+    grunt.loadNpmTasks('grunt-html2js');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['concat', 'uglify', 'concat_css', 'cssmin', 'copy', 'watch']);
+    grunt.registerTask('default', ['concat', 'uglify', 'concat_css', 'cssmin', 'copy', 'html2js']);
 
     //grunt.registerTask('prod', ['uglify']);
     //grunt.registerTask('dev', ['watch']);
