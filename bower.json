@@ -1,6 +1,6 @@
 {
   "name": "watg-angular-feedback",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "homepage": "https://github.com/tkoseoglu/watg-angular-feedback",
   "authors": [
     "Tolga <tkoseoglu@live.com>"
@@ -14,7 +14,8 @@
     "bower_components",
     "test",
     "tests",
-    "src"
+    "src",
+    "dev"
   ],
   "devDependencies": {
     "angular": "~1.4.3",
