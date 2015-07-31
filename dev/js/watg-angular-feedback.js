@@ -1,7 +1,7 @@
 /**
  * Created by Kemal on 07/30/15.
  */
-var watgFeedbackModule = angular.module('watgFeedback', ['ngRoute', 'watgFeedback.templates'])
+var watgFeedbackModule = angular.module('watgFeedback', ['ngRoute', 'watgFeedback.templates','watgRichtext'])
     .config(function ($routeProvider, $httpProvider) {
 
         $httpProvider.defaults.useXDomain = true;
@@ -105,6 +105,16 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
                 $scope.getProjectDetails();
             }
         });
+        $scope.$watch('feedbackItem.feedback', function (newValue, oldValue) {
+
+            if (newValue === "" || newValue === "<br>")
+                $scope.form.inputForm.$setValidity("message", false);
+            else
+                $scope.form.inputForm.$setValidity("message", true);
+
+            console.log('rich text changed');
+        });
+
 
         $scope.getProjectDetails();
 
@@ -120,7 +130,7 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
     }];
     return {
         restrict: 'E',
-        templateUrl: 'app/templates/feedbackTemplate.html',
+        templateUrl: 'app/templates/watgFeedbackTemplate.html',
         scope: {
             projectName: '=',
             getUrl: '=',

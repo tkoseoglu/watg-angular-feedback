@@ -41,11 +41,11 @@ module.exports = function (grunt) {
                 src: [
                     'bower_components/jquery/dist/jquery.min.js',
                     'bower_components/bootstrap/dist/js/bootstrap.min.js',
-                    'bower_components/moment/min/moment.min.js',
                     'bower_components/angular/angular.min.js',
                     'bower_components/angular-sanitize/angular-sanitize.min.js',
                     'bower_components/angular-route/angular-route.min.js',
-                    'bower_components/angular-animate/angular-animate.min.js'
+                    'bower_components/watg-angular-richtext/dist/js/watg-angular-richtext.min.js',
+                    'bower_components/watg-angular-richtext/dist/js/watg-angular-richtext.tpl.js'
                 ],
                 dest: 'dev/js/vendor.min.js'
             }
@@ -94,14 +94,15 @@ module.exports = function (grunt) {
                 files: {
                     'dev/css/vendor.min.css': [
                         'bower_components/bootstrap/dist/css/bootstrap.css',
-                        'bower_components/fontawesome/css/font-awesome.css'
+                        'bower_components/fontawesome/css/font-awesome.css',
+                        'bower_components/watg-angular-richtext/dist/css/watg-angular-richtext.min.css'
                     ]
                 }
             }
         },
         watch: {
             files: ['src/app/**/*.js', 'src/assets/*.css'],
-            tasks: ['concat:app','concat:appdist', 'uglify', 'concat_css', 'cssmin:assets', 'cssmin:assetsdist']
+            tasks: ['concat:app', 'concat:appdist', 'uglify', 'concat_css', 'cssmin:assets', 'cssmin:assetsdist']
         },
         copy: {
             main: {
@@ -117,13 +118,6 @@ module.exports = function (grunt) {
                         expand: true,
                         src: ['bower_components/footable/css/fonts/*'],
                         dest: 'dev/css/fonts/',
-                        filter: 'isFile',
-                        flatten: true
-                    },
-                    {
-                        expand: true,
-                        src: ['content/images/*', 'bower_components/jquery-ui/themes/base/images/*'],
-                        dest: 'dev/css/images/',
                         filter: 'isFile',
                         flatten: true
                     }

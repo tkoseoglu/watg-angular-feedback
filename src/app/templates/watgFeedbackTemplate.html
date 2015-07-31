@@ -1,35 +1,3 @@
-<style>
-    .star-rating {
-        margin: 0;
-        padding: 0;
-        display: inline-block;
-    }
-
-    .star-rating .star {
-        padding: 1px;
-        color: #ddd;
-        font-size: 20px;
-        text-shadow: .05em .05em #aaa;
-        list-style-type: none;
-        display: inline-block;
-        cursor: pointer;
-    }
-
-    .star-rating .star.filled {
-        color: #fd0;
-    }
-
-    .star-rating.readonly .star.filled {
-        color: #666;
-    }
-
-    .feedbackMainContent {
-        margin-left: 20px;
-        margin-right: 20px;
-        overflow-x: hidden;
-    }
-</style>
-
 <div class="feedbackMainContent">
     <h2>Feedback</h2>
 
@@ -51,12 +19,14 @@
             <div class="form-group"
                  ng-class="{'has-error': form.inputForm.message.$invalid}">
                 <label>Feedback from {{userFullName}}</label>
-                <textarea name="message"
-                          class="form-control"
-                          rows="4"
-                          ng-disabled="isBusySubmittingFeedback"
-                          ng-model="feedbackItem.feedback"
-                          required></textarea>
+
+                <div>
+                    <watg-richtext-editor name="message"
+                                          rich-text="feedbackItem.feedback"
+                                          required></watg-richtext-editor>
+                </div>
+
+
             </div>
             <div class="form-group">
                 <label>Rating</label><br/>
@@ -70,6 +40,7 @@
                 </ul>
             </div>
             <hr/>
+
             <div class="form-group">
                 <button class="btn btn-primary pull-right"
                         type="button"
@@ -87,4 +58,6 @@
             </h3>
         </div>
     </div>
+
+
 </div>

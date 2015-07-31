@@ -17,17 +17,14 @@
     "dev"
   ],
   "dependencies": {
-    "angular": "*"
+    "angular": "*",
+    "watg-angular-richtext": "*"
   },
   "devDependencies": {
     "jquery": "*",
-    "angular": "*",
     "angular-route": "*",
     "bootstrap": "*",
     "fontawesome": "*",
     "toastr": "*"
-  },
-  "resolutions": {
-    "angular": "1.4.3"
   }
 }

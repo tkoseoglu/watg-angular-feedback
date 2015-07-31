@@ -70,6 +70,16 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
                 $scope.getProjectDetails();
             }
         });
+        $scope.$watch('feedbackItem.feedback', function (newValue, oldValue) {
+
+            if (newValue === "" || newValue === "<br>")
+                $scope.form.inputForm.$setValidity("message", false);
+            else
+                $scope.form.inputForm.$setValidity("message", true);
+
+            console.log('rich text changed');
+        });
+
 
         $scope.getProjectDetails();
 
@@ -85,7 +95,7 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
     }];
     return {
         restrict: 'E',
-        templateUrl: 'app/templates/feedbackTemplate.html',
+        templateUrl: 'app/templates/watgFeedbackTemplate.html',
         scope: {
             projectName: '=',
             getUrl: '=',

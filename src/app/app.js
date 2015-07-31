@@ -1,7 +1,7 @@
 /**
  * Created by Kemal on 07/30/15.
  */
-var watgFeedbackModule = angular.module('watgFeedback', ['ngRoute', 'watgFeedback.templates'])
+var watgFeedbackModule = angular.module('watgFeedback', ['ngRoute', 'watgFeedback.templates','watgRichtext'])
     .config(function ($routeProvider, $httpProvider) {
 
         $httpProvider.defaults.useXDomain = true;
