@@ -1,6 +1,6 @@
 {
   "name": "watg-angular-feedback",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "angularjs feedback module for WATG",
   "main": "./dist/js/watg-angular-feedback.min.js",
   "scripts": {
