@@ -75,6 +75,7 @@ watgFeedbackModule.directive("watgFeedback", function (feedbackService) {
             }
         }
 
+
         $scope.getProjectDetails();
 
     }];
