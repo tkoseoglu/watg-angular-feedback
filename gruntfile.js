@@ -128,7 +128,7 @@ module.exports = function (grunt) {
                         flatten: true
                     }
                 ]
-            },
+            }
         },
         html2js: {
             options: {
@@ -164,5 +164,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('default', ['concat', 'uglify', 'concat_css', 'cssmin', 'copy']);
     grunt.registerTask('dist', ['concat:appdist', 'uglify:appdist', 'concat_css:assetsdist', 'cssmin:assetsdist', 'html2js']);
+
 
 };
