@@ -55,7 +55,7 @@ watgFeedbackModule.directive("watgFeedback", function (feedbackService) {
             userAgent: '',
             screenResolution: '',
             rating: null
-        }
+        };
         $scope.max = 5;
         $scope.stars = [];
         $scope.ratingValue = 3;
@@ -84,6 +84,10 @@ watgFeedbackModule.directive("watgFeedback", function (feedbackService) {
 
                 console.log(result);
                 var transactionResult = result;
+
+                if (transactionResult.HasError === true)
+                    consoloe.error('Feedback Error ' + transactionResult.Message);
+
                 $scope.showConfirmation = true;
                 $scope.isBusySubmittingFeedback = false;
 
@@ -105,8 +109,7 @@ watgFeedbackModule.directive("watgFeedback", function (feedbackService) {
                     filled: i < $scope.ratingValue
                 });
             }
-        };
-
+        }
 
         $scope.getProjectDetails();
     }];
@@ -120,7 +123,7 @@ watgFeedbackModule.directive("watgFeedback", function (feedbackService) {
             userFullName: '='
         },
         controller: controller,
-        link: function (scope, element) {
+        link: function (scope) {
 
             console.log(scope.projectName);
             console.log(scope.getUrl);
@@ -135,7 +138,7 @@ watgFeedbackModule.directive("watgFeedback", function (feedbackService) {
  * Created by Kemal on 07/30/15.
  */
 'use strict';
-watgFeedbackModule.factory('feedbackService', function ($http, $log, $q, $rootScope) {
+watgFeedbackModule.factory('feedbackService', function ($http) {
 
     return {
         getProjectDetails: function (url) {
