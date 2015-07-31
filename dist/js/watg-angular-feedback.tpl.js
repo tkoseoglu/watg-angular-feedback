@@ -1,6 +1,6 @@
 angular.module('watgFeedback.templates', []).run(['$templateCache', function($templateCache) {
   "use strict";
-  $templateCache.put("templates/feedbackTemplate.html",
+  $templateCache.put("app/templates/feedbackTemplate.html",
     "<style>.star-rating {\n" +
     "        margin: 0;\n" +
     "        padding: 0;\n" +

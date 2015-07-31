@@ -116,7 +116,7 @@ module.exports = function (grunt) {
         },
         html2js: {
             options: {
-                base: 'src/app',
+                base: 'src',
                 module: 'watgFeedback.templates',
                 singleModule: true,
                 useStrict: true,
