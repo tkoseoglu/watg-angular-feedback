@@ -120,7 +120,7 @@ module.exports = function (grunt) {
             },
             main: {
                 src: ['src/app/templates/*.html'],
-                dest: 'dist/tmp/templates.js'
+                dest: 'dist/js/watg-angular-feedback.tpl.js'
             }
         }
     });
