@@ -110,7 +110,7 @@ watgFeedbackModule.directive("watgFeedback", function (feedbackService) {
     }];
     return {
         restrict: 'E',
-        templateUrl: 'app/directives/feedbackTemplate.html',
+        templateUrl: 'app/templates/feedbackTemplate.html',
         scope: {
             projectName: '=',
             getUrl: '=',

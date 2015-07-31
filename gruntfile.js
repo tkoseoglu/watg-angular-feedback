@@ -116,10 +116,23 @@ module.exports = function (grunt) {
         },
         html2js: {
             options: {
-                // custom options, see below
+                base: 'src/app',
+                module: 'watgFeedback.templates',
+                singleModule: true,
+                useStrict: true,
+                htmlmin: {
+                    collapseBooleanAttributes: true,
+                    collapseWhitespace: true,
+                    removeAttributeQuotes: true,
+                    removeComments: true,
+                    removeEmptyAttributes: true,
+                    removeRedundantAttributes: true,
+                    removeScriptTypeAttributes: true,
+                    removeStyleLinkTypeAttributes: true
+                }
             },
             main: {
-                src: ['src/app/directives/*.html'],
+                src: ['src/app/templates/*.html'],
                 dest: 'dist/js/watg-angular-feedback.tpl.js'
             }
         }
