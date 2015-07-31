@@ -2,7 +2,7 @@
   "name": "watg-angular-feedback",
   "version": "0.0.1",
   "description": "angularjs feedback module for WATG",
-  "main": "index.js",
+  "main": "./dist/js/watg-angular-feedback.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
