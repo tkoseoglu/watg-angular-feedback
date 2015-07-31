@@ -2,7 +2,7 @@
  * Created by Kemal on 07/30/15.
  */
 'use strict';
-watgFeedbackModule.factory('feedbackService', function ($http) {
+watgFeedbackModule.factory('watgFeedbackService', function ($http) {
 
     return {
         getProjectDetails: function (url) {

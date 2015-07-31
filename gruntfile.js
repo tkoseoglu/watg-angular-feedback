@@ -24,9 +24,18 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         concat: {
-            app: {
-                src: ['src/app/**/*.js'],
+            appdist: {
+                src: ['src/app/appdist.js',
+                    'src/app/directives/watgFeedbackDirective.js',
+                    'src/app/services/watgFeedbackService.js'],
                 dest: 'dist/js/watg-angular-feedback.js'
+            },
+            app: {
+                src: ['src/app/app.js',
+                    'src/app/controllers/watgFeedbackTestController.js',
+                    'src/app/directives/watgFeedbackDirective.js',
+                    'src/app/services/watgFeedbackService.js'],
+                dest: 'dev/js/watg-angular-feedback.js'
             },
             vendor: {
                 src: [
@@ -38,7 +47,7 @@ module.exports = function (grunt) {
                     'bower_components/angular-route/angular-route.min.js',
                     'bower_components/angular-animate/angular-animate.min.js'
                 ],
-                dest: 'dist/js/vendor.min.js'
+                dest: 'dev/js/vendor.min.js'
             }
         },
         uglify: {
@@ -48,12 +57,21 @@ module.exports = function (grunt) {
             },
             app: {
                 files: {
+                    'dev/js/watg-angular-feedback.min.js': ['dev/js/watg-angular-feedback.js']
+                }
+            },
+            appdist: {
+                files: {
                     'dist/js/watg-angular-feedback.min.js': ['dist/js/watg-angular-feedback.js']
                 }
             }
         },
         concat_css: {
             assets: {
+                src: ["src/assets/watg-angular-feedback.css"],
+                dest: "dev/css/watg-angular-feedback.css"
+            },
+            assetsdist: {
                 src: ["src/assets/watg-angular-feedback.css"],
                 dest: "dist/css/watg-angular-feedback.css"
             }
@@ -64,12 +82,17 @@ module.exports = function (grunt) {
             },
             assets: {
                 files: {
+                    'dev/css/watg-angular-feedback.min.css': ['dev/css/watg-angular-feedback.css']
+                }
+            },
+            assetsdist: {
+                files: {
                     'dist/css/watg-angular-feedback.min.css': ['dist/css/watg-angular-feedback.css']
                 }
             },
             vendor: {
                 files: {
-                    'dist/css/vendor.min.css': [
+                    'dev/css/vendor.min.css': [
                         'bower_components/bootstrap/dist/css/bootstrap.css',
                         'bower_components/fontawesome/css/font-awesome.css'
                     ]
@@ -78,7 +101,7 @@ module.exports = function (grunt) {
         },
         watch: {
             files: ['src/app/**/*.js', 'src/assets/*.css'],
-            tasks: ['concat', 'uglify', 'concat_css', 'cssmin']
+            tasks: ['concat:app','concat:appdist', 'uglify', 'concat_css', 'cssmin:assets', 'cssmin:assetsdist']
         },
         copy: {
             main: {
@@ -86,28 +109,21 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         src: ['bower_components/fontawesome/fonts/*', 'bower_components/bootstrap/fonts/*'],
-                        dest: 'dist/fonts/',
+                        dest: 'dev/fonts/',
                         filter: 'isFile',
                         flatten: true
                     },
                     {
                         expand: true,
                         src: ['bower_components/footable/css/fonts/*'],
-                        dest: 'dist/css/fonts/',
-                        filter: 'isFile',
-                        flatten: true
-                    },
-                    {
-                        expand: true,
-                        src: ['bower_components/fuelux/dist/fonts/*'],
-                        dest: 'dist/css/fonts/',
+                        dest: 'dev/css/fonts/',
                         filter: 'isFile',
                         flatten: true
                     },
                     {
                         expand: true,
                         src: ['content/images/*', 'bower_components/jquery-ui/themes/base/images/*'],
-                        dest: 'dist/css/images/',
+                        dest: 'dev/css/images/',
                         filter: 'isFile',
                         flatten: true
                     }
@@ -146,9 +162,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['concat', 'uglify', 'concat_css', 'cssmin', 'copy', 'html2js']);
-
-    //grunt.registerTask('prod', ['uglify']);
-    //grunt.registerTask('dev', ['watch']);
+    grunt.registerTask('default', ['concat', 'uglify', 'concat_css', 'cssmin', 'copy']);
+    grunt.registerTask('dist', ['concat:appdist', 'uglify:appdist', 'concat_css:assetsdist', 'cssmin:assetsdist', 'html2js']);
 
 };

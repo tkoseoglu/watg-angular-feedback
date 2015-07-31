@@ -1,6 +1,6 @@
 "use strict";
-watgFeedbackModule.controller('feedbackTestController',
-    function feedbackTestController($scope) {
+watgFeedbackModule.controller('watgFeedbackTestController',
+    function watgFeedbackTestController($scope) {
         $scope.header = 'Feedback';
 
         $scope.projectName = "eMail Campaign App";
@@ -9,7 +9,6 @@ watgFeedbackModule.controller('feedbackTestController',
         $scope.user = {
             FullName: 'Tolga Koseoglu'
         }
-
 
     }
 );

@@ -1,7 +1,7 @@
 /**
  * Created by Kemal on 07/30/15.
  */
-var watgFeedbackModule = angular.module('watgFeedback', ['ngRoute', 'ngSanitize', 'watgFeedback.templates'])
+var watgFeedbackModule = angular.module('watgFeedback', ['ngRoute', 'watgFeedback.templates'])
     .config(function ($routeProvider, $httpProvider) {
 
         $httpProvider.defaults.useXDomain = true;
@@ -11,8 +11,8 @@ var watgFeedbackModule = angular.module('watgFeedback', ['ngRoute', 'ngSanitize'
         $routeProvider
             .when('/',
             {
-                templateUrl: 'app/views/feedbackView.html',
-                controller: 'feedbackTestController'
+                templateUrl: 'app/views/watgFeedbackView.html',
+                controller: 'watgFeedbackTestController'
             })
             .otherwise({redirectTo: '/'});
     });

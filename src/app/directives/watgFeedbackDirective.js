@@ -1,7 +1,7 @@
 /**
  * Created by Kemal on 07/30/15.
  */
-watgFeedbackModule.directive("watgFeedback", function (feedbackService) {
+watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
     var controller = ['$scope', function ($scope) {
 
         $scope.header = 'Feedback';
@@ -26,7 +26,7 @@ watgFeedbackModule.directive("watgFeedback", function (feedbackService) {
 
         $scope.getProjectDetails = function () {
             $scope.isBusy = true;
-            feedbackService.getProjectDetails($scope.getUrl + '/' + $scope.projectName).then(function (result) {
+            watgFeedbackService.getProjectDetails($scope.getUrl + '/' + $scope.projectName).then(function (result) {
                 $scope.feedbackItem.applicationId = result.Id;
                 $scope.feedbackItem.applicationName = result.ProjectName;
                 $scope.feedbackItem.applicationDescription = result.ProjectDescription;
@@ -44,7 +44,7 @@ watgFeedbackModule.directive("watgFeedback", function (feedbackService) {
             $scope.feedbackItem.screenResolution = screen.width + '*' + screen.height;
             $scope.feedbackItem.rating = $scope.ratingValue;
 
-            feedbackService.addProjectFeedback($scope.feedbackItem, $scope.submitUrl).then(function (result) {
+            watgFeedbackService.addProjectFeedback($scope.feedbackItem, $scope.submitUrl).then(function (result) {
 
                 console.log(result);
                 var transactionResult = result;
@@ -65,8 +65,15 @@ watgFeedbackModule.directive("watgFeedback", function (feedbackService) {
                 updateStars();
             }
         });
-        function updateStars() {
+        $scope.$watch('projectName', function (oldValue, newValue) {
+            if (newValue) {
+                $scope.getProjectDetails();
+            }
+        });
 
+        $scope.getProjectDetails();
+
+        function updateStars() {
             $scope.stars = [];
             for (var i = 0; i < $scope.max; i++) {
                 $scope.stars.push({
@@ -74,9 +81,6 @@ watgFeedbackModule.directive("watgFeedback", function (feedbackService) {
                 });
             }
         }
-
-
-        $scope.getProjectDetails();
 
     }];
     return {
@@ -95,6 +99,7 @@ watgFeedbackModule.directive("watgFeedback", function (feedbackService) {
             console.log(scope.getUrl);
             console.log(scope.submitUrl);
             console.log(scope.userFullName);
+
 
         }
 

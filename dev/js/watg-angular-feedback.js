@@ -1,11 +1,37 @@
 /**
  * Created by Kemal on 07/30/15.
  */
-var watgFeedbackModule = angular.module('watgFeedback', ['watgFeedback.templates'])
-    .config(function ($httpProvider) {
+var watgFeedbackModule = angular.module('watgFeedback', ['ngRoute', 'watgFeedback.templates'])
+    .config(function ($routeProvider, $httpProvider) {
+
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
+
+        $routeProvider
+            .when('/',
+            {
+                templateUrl: 'app/views/watgFeedbackView.html',
+                controller: 'watgFeedbackTestController'
+            })
+            .otherwise({redirectTo: '/'});
     });
+
+"use strict";
+watgFeedbackModule.controller('watgFeedbackTestController',
+    function watgFeedbackTestController($scope) {
+        $scope.header = 'Feedback';
+
+        $scope.projectName = "eMail Campaign App";
+        $scope.getProjectDetailsUrl = 'http://itstage.watg.com/watgxapirest/api/Feedback/GetProjectDetails/';
+        $scope.submitProjectFeedbackUrl = 'http://itstage.watg.com/watgxapirest/api/Feedback/AddProjectFeedback';
+        $scope.user = {
+            FullName: 'Tolga Koseoglu'
+        }
+
+    }
+);
+
 
 /**
  * Created by Kemal on 07/30/15.
