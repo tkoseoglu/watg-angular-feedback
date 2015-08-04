@@ -8,8 +8,7 @@ watgFeedbackModule.controller('watgFeedbackTestController',
         $scope.submitProjectFeedbackUrl = 'http://itstage.watg.com/watgxapirest/api/Feedback/AddProjectFeedback';
         $scope.user = {
             FullName: 'Tolga Koseoglu'
-        }
-
+        };
     }
 );
 

@@ -32,6 +32,33 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
         $scope.max = 5;
         $scope.stars = [];
         $scope.ratingValue = 3;
+        $scope.feedbackConfig = {
+            height: 300,             //default 300
+            multiLine: true,       //default true
+            bootstrapCssPath: 'public/css/vendor.min.css',
+            showVariablesSelector: true,
+            showFontSelector: true,
+            showFontSizeSelector: true,
+            showColorSelector: true,
+            showBold: true,
+            showItalic: true,
+            showStrikeThrough: true,
+            showUnderline: true,
+            showUnorderedList: true,
+            showOrderedList: true,
+            showReduceIndent: true,
+            showIndent: true,
+            showLeftAlign: true,
+            showCenterAlign: true,
+            showRightAlign: true,
+            showJustify: true,
+            showUndo: true,
+            showRedo: true,
+            showInsertLink: true,
+            showRemoveLink: true,
+            showSourceCode: true
+        };
+
 
         $scope.getProjectDetails = function () {
             $scope.isBusy = true;
