@@ -1,17 +1,8 @@
-<form>
-    <form-group>
-        <input type="text"
-               ng-model="projectName"
-               placeholder="project name"
-               class="form-control"/>
-    </form-group>
-</form>
-
-<br>
 
 <div class="well well-lg">
-    <watg-feedback project-name="projectName"
+    <watg-feedback project-name="'eMail Campaign App'"
                    get-url="getProjectDetailsUrl"
                    submit-url="submitProjectFeedbackUrl"
+                   url-referrer="'Accounts'"
                    user-full-name="user.FullName"></watg-feedback>
 </div>

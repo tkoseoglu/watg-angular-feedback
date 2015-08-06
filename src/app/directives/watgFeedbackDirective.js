@@ -23,6 +23,8 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
         $scope.max = 5;
         $scope.stars = [];
         $scope.ratingValue = 3;
+
+        $scope.feebackContentResetCount = [];
         $scope.feedbackConfig = {
             height: 300,             //default 300
             multiLine: true,       //default true
@@ -47,7 +49,7 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
             showRedo: true,
             showInsertLink: true,
             showRemoveLink: true,
-            showSourceCode: true
+            showSourceCode: false
         };
 
 
@@ -70,6 +72,9 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
             $scope.feedbackItem.userAgent = navigator.userAgent;
             $scope.feedbackItem.screenResolution = screen.width + '*' + screen.height;
             $scope.feedbackItem.rating = $scope.ratingValue;
+
+            if ($scope.urlReferrer)
+                $scope.feedbackItem.feedback += "<br />(Previous page) " + $scope.urlReferrer;
 
             watgFeedbackService.addProjectFeedback($scope.feedbackItem, $scope.submitUrl).then(function (result) {
 
@@ -127,7 +132,8 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
             projectName: '=',
             getUrl: '=',
             submitUrl: '=',
-            userFullName: '='
+            userFullName: '=',
+            urlReferrer: '='
         },
         controller: controller,
         link: function (scope) {
@@ -136,7 +142,6 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
             console.log(scope.getUrl);
             console.log(scope.submitUrl);
             console.log(scope.userFullName);
-
 
         }
 

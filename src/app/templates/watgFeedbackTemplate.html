@@ -21,9 +21,10 @@
                 <label>Feedback from {{userFullName}}</label>
 
                 <div>
-                    <watg-richtext-editor name="message"
+                    <watg-richtext-editor id="'feedbackContent'"
                                           rich-text="feedbackItem.feedback"
                                           config="feedbackConfig"
+                                          reset-count="feebackContentResetCount"
                                           required></watg-richtext-editor>
                 </div>
 
