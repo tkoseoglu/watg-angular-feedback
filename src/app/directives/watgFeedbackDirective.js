@@ -28,7 +28,7 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
         $scope.feedbackConfig = {
             height: 300,             //default 300
             multiLine: true,       //default true
-            bootstrapCssPath: '../public/css/vendor.min.css',
+            bootstrapCssPath: 'public/css/vendor.min.css',
             showVariablesSelector: true,
             showFontSelector: true,
             showFontSizeSelector: true,
