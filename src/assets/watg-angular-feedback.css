@@ -48,3 +48,26 @@
     cursor: inherit;
     display: block;
 }
+
+.attachedFileRow {
+    height: 25px;
+    width: 100%;
+    margin: 3px 0;
+    clear: both;
+}
+
+.attachedFileRow DIV {
+    float: left;
+    margin-right: 5px;
+}
+
+.attachedFileRow SPAN {
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.idosomething {
+    cursor: pointer;
+}

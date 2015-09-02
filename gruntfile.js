@@ -158,7 +158,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['concat', 'uglify', 'concat_css', 'cssmin', 'copy', 'watch']);
+    grunt.registerTask('default', ['concat', 'uglify', 'concat_css', 'cssmin', 'copy']);//, 'watch'
     grunt.registerTask('dist', ['concat:appdist', 'uglify:appdist', 'concat_css:assetsdist', 'cssmin:assetsdist', 'html2js']);
 
 

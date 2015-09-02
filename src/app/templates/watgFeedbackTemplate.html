@@ -60,28 +60,23 @@
                                             messages="attachmentUploadMessages"/>
                                 </span>
                 </div>
-                <br />
+                <br>
+
                 <div ng-show="attachmentUploadMessages.length>0">
                     <div ng-repeat="m in attachmentUploadMessages">
                         {{m}}
                     </div>
                 </div>
                 <div ng-show="appDevProjectUI.Files.length > 0">
-                    <div ng-repeat="f in appDevProjectUI.Files" class="row">
-                        <div class="col-xs-10 col-sm-6 col-md-6 col-lg-4">
-                            <input name="fileName"
-                                   class="form-control"
-                                   type="text"
-                                   ng-model="f.name"
-                                   ng-disabled="true" />
+                    <div class="attachedFileRow"
+                         ng-repeat="f in appDevProjectUI.Files">
+                        <div>
+                            <span>{{f.name}}</span>
                         </div>
-                        <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
-                            <button type="button"
-                                    class="btn btn-danger pull-left"
-                                    title="remove"
-                                    ng-click="appDevProjectUI.Files.splice($index, 1)">
-                                <i class="fa fa-remove"></i>
-                            </button>
+                        <div>
+                            <i class="fa fa-remove idosomething"
+                               title="remove"
+                               ng-click="appDevProjectUI.Files.splice($index, 1)"></i>
                         </div>
                     </div>
                 </div>
@@ -94,10 +89,7 @@
                 <div class="pull-right">
                     <button class="btn btn-primary"
                             type="button"
-                            ng-disabled="form.inputForm.$invalid ||
-                        isBusySubmittingFeedback ||
-                        !appDevProjectUI.AppDevProjectId ||
-                        !appDevProjectUI.FeedbackContent"
+                            ng-disabled="form.inputForm.$invalid || isBusySubmittingFeedback || !appDevProjectUI.AppDevProjectId || !appDevProjectUI.FeedbackContent"
                             ng-click="submitAppDevProjectFeedback()">
                         <i class="fa fa-refresh fa-spin"
                            ng-show="isBusySubmittingFeedback"></i> Submit

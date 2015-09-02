@@ -11,13 +11,16 @@ watgFeedbackModule.directive("watgFeedbackFileselect", function () {
             maxImageHeight: '=maxImageHeight',
             maxImageWidth: '=maxImageWidth',
             messages: '=',
-            isBusy: '=',
-            imageSrc: "="
+            isBusy: '='
         },
         link: function (scope, element) {
+
             element.bind("change", function (e) {
+
                 scope.messages = [];
+                scope.imageSrc;
                 var selectedFiles = (e.srcElement || e.target).files;
+
                 if (selectedFiles) {
                     for (var i = 0; i < selectedFiles.length; i++) {
 
