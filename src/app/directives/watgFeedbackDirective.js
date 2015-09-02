@@ -137,12 +137,12 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
             submitUrl: '=',
             userFullName: '=',
             urlReferrer: '=',
-            logsEnabled: "=",
-            feedbackInputHeight: "=",
-            feedbackMaxNumberOfAttachments: "=",
-            feedbackAttachmentMaxSize: "=",
-            feedbackAttachmentImageMaxHeight: "=",
-            feedbackAttachmentImageMaxWidth: "="
+            logsEnabled: "=?",
+            feedbackInputHeight: "=?",
+            feedbackMaxNumberOfAttachments: "=?",
+            feedbackAttachmentMaxSize: "=?",
+            feedbackAttachmentImageMaxHeight: "=?",
+            feedbackAttachmentImageMaxWidth: "=?"
         },
         controller: controller,
         link: function (scope) {
@@ -161,6 +161,9 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
 
             if (!scope.feedbackMaxNumberOfAttachments)
                 scope.feedbackMaxNumberOfAttachments = 5;
+
+            if (!scope.logsEnabled)
+                scope.logsEnabled = true;
 
             if (scope.logsEnabled) {
                 console.log(scope.projectName);
