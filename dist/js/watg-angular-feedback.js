@@ -168,7 +168,7 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
 /**
  * Created by Kemal on 09/01/15.
  */
-watgFeedbackModule.directive("wgFileSelect", function () {
+watgFeedbackModule.directive("watgFeedbackFileselect", function () {
 
     return {
         restrict: 'A',
