@@ -15,6 +15,9 @@ watgFeedbackModule.controller('watgFeedbackTestController',
             FullName: 'Tolga Koseoglu'
         };
 
+        console.log(navigator["vendor"]);
+
+
         navigator["appCodeName"];
         navigator["appName"];
         navigator["appMinorVersion"];
@@ -32,8 +35,8 @@ watgFeedbackModule.controller('watgFeedbackTestController',
         navigator["mimeTypes"];
 
 
-        var x = '';
         for (var p in navigator) {
+            console.log(p);
             console.log(navigator[p]);
         }
 

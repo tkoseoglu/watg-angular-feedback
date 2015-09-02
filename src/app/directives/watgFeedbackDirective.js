@@ -70,7 +70,7 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
 
             $scope.isBusySubmittingFeedback = true;
 
-            $scope.appDevProjectUI.Vendor = navigator["appName"];
+            $scope.appDevProjectUI.Vendor = navigator["vendor"];
             $scope.appDevProjectUI.Platform = navigator["platform"];
             $scope.appDevProjectUI.UserAgent = navigator["userAgent"];
             $scope.appDevProjectUI.ScreenResolution = window.screen.availWidth + '*' + window.screen.availHeight;

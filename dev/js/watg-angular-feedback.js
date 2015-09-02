@@ -34,6 +34,9 @@ watgFeedbackModule.controller('watgFeedbackTestController',
             FullName: 'Tolga Koseoglu'
         };
 
+        console.log(navigator["vendor"]);
+
+
         navigator["appCodeName"];
         navigator["appName"];
         navigator["appMinorVersion"];
@@ -51,8 +54,8 @@ watgFeedbackModule.controller('watgFeedbackTestController',
         navigator["mimeTypes"];
 
 
-        var x = '';
         for (var p in navigator) {
+            console.log(p);
             console.log(navigator[p]);
         }
 
@@ -133,7 +136,7 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
 
             $scope.isBusySubmittingFeedback = true;
 
-            $scope.appDevProjectUI.Vendor = navigator["appMinorVersion"];
+            $scope.appDevProjectUI.Vendor = navigator["vendor"];
             $scope.appDevProjectUI.Platform = navigator["platform"];
             $scope.appDevProjectUI.UserAgent = navigator["userAgent"];
             $scope.appDevProjectUI.ScreenResolution = window.screen.availWidth + '*' + window.screen.availHeight;
