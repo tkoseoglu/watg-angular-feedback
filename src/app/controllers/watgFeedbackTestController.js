@@ -14,6 +14,30 @@ watgFeedbackModule.controller('watgFeedbackTestController',
         $scope.user = {
             FullName: 'Tolga Koseoglu'
         };
+
+        navigator["appCodeName"];
+        navigator["appName"];
+        navigator["appMinorVersion"];
+        navigator["cpuClass"];
+        navigator["platform"];
+        navigator["plugins"];
+        navigator["opsProfile"];
+        navigator["userProfile"];
+        navigator["systemLanguage"];
+        navigator["userLanguage"];
+        navigator["appVersion"];
+        navigator["userAgent"];
+        navigator["onLine"];
+        navigator["cookieEnabled"];
+        navigator["mimeTypes"];
+
+
+        var x = '';
+        for (var p in navigator) {
+            console.log(navigator[p]);
+        }
+
+
     }
 );
 
