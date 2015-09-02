@@ -17,7 +17,6 @@ watgFeedbackModule.directive("watgFeedbackFileselect", function () {
 
             element.bind("change", function (e) {
 
-                scope.messages = [];
                 scope.imageSrc;
                 var selectedFiles = (e.srcElement || e.target).files;
 
@@ -28,43 +27,52 @@ watgFeedbackModule.directive("watgFeedbackFileselect", function () {
                         scope.$apply();
 
                         var selectedFile = selectedFiles[i];
-                        var reader = new FileReader();
-                        var image = new Image();
 
-                        reader.readAsDataURL(selectedFile);
-                        reader.onload = (function (theFile) {
-                            return function (e) {
+                        if (selectedFile.type !== "application/x-msdownload") {
+                            var reader = new FileReader();
+                            var image = new Image();
 
-                                var isValid = true;
+                            reader.readAsDataURL(selectedFile);
+                            reader.onload = (function (theFile) {
+                                return function (e) {
 
-                                image.src = e.target.result;
-                                scope.imageSrc = image.src;
+                                    var isValid = true;
 
-                                if (image.height > scope.maxImageHeight) {
-                                    isValid = false;
-                                    scope.messages.push("Image " + theFile.name + " (" + image.height + "px) exceeds the max height limit of " + scope.maxImageHeight + "px.");
-                                }
-                                if (image.width > scope.maxImageWidth) {
-                                    isValid = false;
-                                    scope.messages.push("Image " + theFile.name + " (" + image.width + "px) exceeds the max width limit of " + scope.maxImageHeight + "px.");
-                                }
-                                if (theFile.size > scope.maxFileSize) {
-                                    isValid = false;
-                                    scope.messages.push("File " + theFile.name + " (" + (theFile.size / (1024 * 1024)).toFixed(2) + " MB) exceeds the max size limit of " + (scope.maxFileSize / (1024 * 1024)) + " MB.");
-                                }
+                                    image.src = e.target.result;
+                                    scope.imageSrc = image.src;
 
-                                if (isValid)
-                                    scope.files.push(theFile);
+                                    if (image.height > scope.maxImageHeight) {
+                                        isValid = false;
+                                        scope.messages.push("Image " + theFile.name + " (" + image.height + "px) exceeds the max height limit of " + scope.maxImageHeight + "px.");
+                                    }
+                                    if (image.width > scope.maxImageWidth) {
+                                        isValid = false;
+                                        scope.messages.push("Image " + theFile.name + " (" + image.width + "px) exceeds the max width limit of " + scope.maxImageHeight + "px.");
+                                    }
+                                    if (theFile.size > scope.maxFileSize) {
+                                        isValid = false;
+                                        scope.messages.push("File " + theFile.name + " (" + (theFile.size / (1024 * 1024)).toFixed(2) + " MB) exceeds the max size limit of " + (scope.maxFileSize / (1024 * 1024)) + " MB.");
+                                    }
 
-                                scope.isBusy = false;
-                                scope.$apply();
-                            };
-                        })(selectedFile);
+                                    if (isValid) {
+                                        scope.files.push(theFile);
+                                    }
 
+
+                                    scope.isBusy = false;
+                                    scope.$apply();
+                                };
+                            })(selectedFile);
+                        }
+                        else {
+                            scope.messages.push("File " + selectedFile.name + " is unsupported");
+                            scope.$apply();
+                        }
                     }
                 }
                 else {
                     scope.messages.push("File not found");
+                    scope.$apply();
                 }
             })
         }

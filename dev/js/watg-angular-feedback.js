@@ -26,6 +26,8 @@ watgFeedbackModule.controller('watgFeedbackTestController',
 
         var feedbackServiceLocation = "http://localhost/WATGx.API.REST.Web/api/Feedback/";
 
+        $scope.maxAttachmentSize = (1024 * 1024) * 1;
+        $scope.maxNumberOfAttachments = 2;
         $scope.getAppDevProjectByProjectNameUrl = feedbackServiceLocation + 'GetAppDevProjectByProjectName';
         $scope.submitAppDevProjectFeedbackUrl = feedbackServiceLocation + 'SubmitAppDevProjectFeedback';
         $scope.user = {
@@ -47,11 +49,11 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
         $scope.form = {};
         $scope.max = 5;
         $scope.stars = [];
-        $scope.ratingValue = 3;
+        $scope.ratingValue = 0;
         $scope.feebackContentResetCount = [];
-        $scope.feedbackConfig = {
-            height: 100,             //default 300
-            multiLine: true,       //default true
+        $scope.feedbackRichtextConfig = {
+            height: $scope.feedbackInputHeight,                        //default 300
+            multiLine: true,                    //default true
             bootstrapCssPath: 'public/css/vendor.min.css',
             showVariablesSelector: true,
             showFontSelector: true,
@@ -75,12 +77,8 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
             showRemoveLink: true,
             showSourceCode: false
         };
-        $scope.attachmentMaxSize = (1024 * 1024) / 5;
-        $scope.attachmentMaxImageHeight = 1000;
-        $scope.attachmentMaxImageWidth = 1000;
         $scope.attachmentUploadIsBusy = false;
         $scope.attachmentUploadMessages = [];
-
         $scope.appDevProjectUI = {
             AppDevProjectId: 0,
             AppDevProjectName: '',
@@ -106,7 +104,6 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
                 $scope.isBusy = false;
             });
         };
-
         $scope.submitAppDevProjectFeedback = function () {
 
             $scope.isBusySubmittingFeedback = true;
@@ -133,6 +130,7 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
 
             });
         };
+
         $scope.toggle = function (index) {
             $scope.ratingValue = index + 1;
         };
@@ -147,14 +145,15 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
             }
         });
         $scope.$watch('appDevProjectUI.FeedbackContent', function (newValue) {
-
             if (newValue === "" || newValue === "<br>")
                 $scope.form.inputForm.$setValidity("message", false);
             else
                 $scope.form.inputForm.$setValidity("message", true);
-
         });
 
+        $scope.$watchCollection("appDevProjectUI.Files", function (newValue, oldValue) {
+            $scope.attachmentUploadMessages = [];
+        });
         function updateStars() {
             $scope.stars = [];
             for (var i = 0; i < $scope.max; i++) {
@@ -165,6 +164,7 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
         }
 
         $scope.getAppDevProjectByProjectName();
+        updateStars();
 
     }];
     return {
@@ -176,10 +176,30 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
             submitUrl: '=',
             userFullName: '=',
             urlReferrer: '=',
-            logsEnabled: "="
+            logsEnabled: "=",
+            feedbackInputHeight: "=",
+            feedbackMaxNumberOfAttachments: "=",
+            feedbackAttachmentMaxSize: "=",
+            feedbackAttachmentImageMaxHeight: "=",
+            feedbackAttachmentImageMaxWidth: "="
         },
         controller: controller,
         link: function (scope) {
+
+            if (!scope.feedbackInputHeight)
+                scope.feedbackInputHeight = 100;
+
+            if (!scope.feedbackAttachmentMaxSize)
+                scope.feedbackAttachmentMaxSize = (1024 * 1024) * 2;
+
+            if (!scope.feedbackAttachmentImageMaxHeight)
+                scope.feedbackAttachmentImageMaxHeight = 1000;
+
+            if (!scope.feedbackAttachmentImageMaxWidth)
+                scope.feedbackAttachmentImageMaxWidth = 1000;
+
+            if (!scope.feedbackMaxNumberOfAttachments)
+                scope.feedbackMaxNumberOfAttachments = 5;
 
             if (scope.logsEnabled) {
                 console.log(scope.projectName);
@@ -212,7 +232,6 @@ watgFeedbackModule.directive("watgFeedbackFileselect", function () {
 
             element.bind("change", function (e) {
 
-                scope.messages = [];
                 scope.imageSrc;
                 var selectedFiles = (e.srcElement || e.target).files;
 
@@ -223,43 +242,52 @@ watgFeedbackModule.directive("watgFeedbackFileselect", function () {
                         scope.$apply();
 
                         var selectedFile = selectedFiles[i];
-                        var reader = new FileReader();
-                        var image = new Image();
 
-                        reader.readAsDataURL(selectedFile);
-                        reader.onload = (function (theFile) {
-                            return function (e) {
+                        if (selectedFile.type !== "application/x-msdownload") {
+                            var reader = new FileReader();
+                            var image = new Image();
 
-                                var isValid = true;
+                            reader.readAsDataURL(selectedFile);
+                            reader.onload = (function (theFile) {
+                                return function (e) {
 
-                                image.src = e.target.result;
-                                scope.imageSrc = image.src;
+                                    var isValid = true;
 
-                                if (image.height > scope.maxImageHeight) {
-                                    isValid = false;
-                                    scope.messages.push("Image " + theFile.name + " (" + image.height + "px) exceeds the max height limit of " + scope.maxImageHeight + "px.");
-                                }
-                                if (image.width > scope.maxImageWidth) {
-                                    isValid = false;
-                                    scope.messages.push("Image " + theFile.name + " (" + image.width + "px) exceeds the max width limit of " + scope.maxImageHeight + "px.");
-                                }
-                                if (theFile.size > scope.maxFileSize) {
-                                    isValid = false;
-                                    scope.messages.push("File " + theFile.name + " (" + (theFile.size / (1024 * 1024)).toFixed(2) + " MB) exceeds the max size limit of " + (scope.maxFileSize / (1024 * 1024)) + " MB.");
-                                }
+                                    image.src = e.target.result;
+                                    scope.imageSrc = image.src;
 
-                                if (isValid)
-                                    scope.files.push(theFile);
+                                    if (image.height > scope.maxImageHeight) {
+                                        isValid = false;
+                                        scope.messages.push("Image " + theFile.name + " (" + image.height + "px) exceeds the max height limit of " + scope.maxImageHeight + "px.");
+                                    }
+                                    if (image.width > scope.maxImageWidth) {
+                                        isValid = false;
+                                        scope.messages.push("Image " + theFile.name + " (" + image.width + "px) exceeds the max width limit of " + scope.maxImageHeight + "px.");
+                                    }
+                                    if (theFile.size > scope.maxFileSize) {
+                                        isValid = false;
+                                        scope.messages.push("File " + theFile.name + " (" + (theFile.size / (1024 * 1024)).toFixed(2) + " MB) exceeds the max size limit of " + (scope.maxFileSize / (1024 * 1024)) + " MB.");
+                                    }
 
-                                scope.isBusy = false;
-                                scope.$apply();
-                            };
-                        })(selectedFile);
+                                    if (isValid) {
+                                        scope.files.push(theFile);
+                                    }
 
+
+                                    scope.isBusy = false;
+                                    scope.$apply();
+                                };
+                            })(selectedFile);
+                        }
+                        else {
+                            scope.messages.push("File " + selectedFile.name + " is unsupported");
+                            scope.$apply();
+                        }
                     }
                 }
                 else {
                     scope.messages.push("File not found");
+                    scope.$apply();
                 }
             })
         }
@@ -296,6 +324,7 @@ watgFeedbackModule.factory('watgFeedbackService', function ($http) {
             formData.append('ScreenResolution', vm.ScreenResolution);
             formData.append('Rating', vm.Rating);
             formData.append('AppDevProjectId', vm.AppDevProjectId);
+
             for (var i = 0; i < vm.Files.length; i++) {
                 formData.append("Files[" + i + "]", vm.Files[i]);
             }

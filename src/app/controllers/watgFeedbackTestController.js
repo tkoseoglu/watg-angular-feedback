@@ -7,6 +7,8 @@ watgFeedbackModule.controller('watgFeedbackTestController',
 
         var feedbackServiceLocation = "http://localhost/WATGx.API.REST.Web/api/Feedback/";
 
+        $scope.maxAttachmentSize = (1024 * 1024) * 1;
+        $scope.maxNumberOfAttachments = 2;
         $scope.getAppDevProjectByProjectNameUrl = feedbackServiceLocation + 'GetAppDevProjectByProjectName';
         $scope.submitAppDevProjectFeedbackUrl = feedbackServiceLocation + 'SubmitAppDevProjectFeedback';
         $scope.user = {

@@ -28,6 +28,7 @@ watgFeedbackModule.factory('watgFeedbackService', function ($http) {
             formData.append('ScreenResolution', vm.ScreenResolution);
             formData.append('Rating', vm.Rating);
             formData.append('AppDevProjectId', vm.AppDevProjectId);
+
             for (var i = 0; i < vm.Files.length; i++) {
                 formData.append("Files[" + i + "]", vm.Files[i]);
             }

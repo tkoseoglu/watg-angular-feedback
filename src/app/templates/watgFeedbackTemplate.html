@@ -24,13 +24,13 @@
                     <watg-richtext-editor id="'feedbackContent'"
                                           name="feedbackContent"
                                           rich-text="appDevProjectUI.FeedbackContent"
-                                          config="feedbackConfig"
+                                          config="feedbackRichtextConfig"
                                           reset-count="feebackContentResetCount"
                                           required></watg-richtext-editor>
                 </div>
             </div>
             <div class="form-group">
-                <label>Rating</label><br/>
+                <label>Click stars to rate</label><br/>
                 <ul class="star-rating">
                     <li ng-repeat="star in stars"
                         class="star"
@@ -42,27 +42,32 @@
             </div>
             <div class="form-group"
                  ng-class="{'has-error': form.inputForm.file.$invalid}">
-                <label>Attachment</label>
-
+                <div ng-if="feedbackMaxNumberOfAttachments>1">
+                    <label>Add Attachments (max.{{feedbackMaxNumberOfAttachments}})</label>
+                </div>
+                <div ng-if="feedbackMaxNumberOfAttachments===1">
+                    <label>Add Attachment</label>
+                </div>
                 <div>
-                    <span class="btn btn-primary btn-file">
+                    <span class="btn btn-primary btn-file"
+                          ng-if="appDevProjectUI.Files.length < feedbackMaxNumberOfAttachments">
                                     <i class="fa fa-plus"></i>
                                      <input type="file"
                                             id="file"
                                             name="file"
+                                            accept=".doc, .pdf, .xls, .xlsx, .docx, image/*"
                                             watg-feedback-fileselect
                                             files="appDevProjectUI.Files"
-                                            max-file-size="attachmentMaxSize"
-                                            messages="attachmentUploadMessages"
-                                            max-image-height="attachmentMaxImageHeight"
-                                            max-image-width="attachmentMaxImageWidth"
+                                            max-file-size="feedbackAttachmentMaxSize"
+                                            max-image-height="feedbackAttachmentImageMaxHeight"
+                                            max-image-width="feedbackAttachmentImageMaxWidth"
                                             is-busy="attachmentUploadIsBusy"
                                             messages="attachmentUploadMessages"/>
                                 </span>
                 </div>
                 <br>
 
-                <div ng-show="attachmentUploadMessages.length>0">
+                <div ng-show="attachmentUploadMessages.length > 0">
                     <div ng-repeat="m in attachmentUploadMessages">
                         {{m}}
                     </div>
@@ -81,7 +86,6 @@
                     </div>
                 </div>
             </div>
-
 
             <hr/>
 

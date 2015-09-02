@@ -10,11 +10,11 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
         $scope.form = {};
         $scope.max = 5;
         $scope.stars = [];
-        $scope.ratingValue = 3;
+        $scope.ratingValue = 0;
         $scope.feebackContentResetCount = [];
-        $scope.feedbackConfig = {
-            height: 100,             //default 300
-            multiLine: true,       //default true
+        $scope.feedbackRichtextConfig = {
+            height: $scope.feedbackInputHeight,                        //default 300
+            multiLine: true,                    //default true
             bootstrapCssPath: 'public/css/vendor.min.css',
             showVariablesSelector: true,
             showFontSelector: true,
@@ -38,12 +38,8 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
             showRemoveLink: true,
             showSourceCode: false
         };
-        $scope.attachmentMaxSize = (1024 * 1024) / 5;
-        $scope.attachmentMaxImageHeight = 1000;
-        $scope.attachmentMaxImageWidth = 1000;
         $scope.attachmentUploadIsBusy = false;
         $scope.attachmentUploadMessages = [];
-
         $scope.appDevProjectUI = {
             AppDevProjectId: 0,
             AppDevProjectName: '',
@@ -69,7 +65,6 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
                 $scope.isBusy = false;
             });
         };
-
         $scope.submitAppDevProjectFeedback = function () {
 
             $scope.isBusySubmittingFeedback = true;
@@ -96,6 +91,7 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
 
             });
         };
+
         $scope.toggle = function (index) {
             $scope.ratingValue = index + 1;
         };
@@ -110,14 +106,15 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
             }
         });
         $scope.$watch('appDevProjectUI.FeedbackContent', function (newValue) {
-
             if (newValue === "" || newValue === "<br>")
                 $scope.form.inputForm.$setValidity("message", false);
             else
                 $scope.form.inputForm.$setValidity("message", true);
-
         });
 
+        $scope.$watchCollection("appDevProjectUI.Files", function (newValue, oldValue) {
+            $scope.attachmentUploadMessages = [];
+        });
         function updateStars() {
             $scope.stars = [];
             for (var i = 0; i < $scope.max; i++) {
@@ -128,6 +125,7 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
         }
 
         $scope.getAppDevProjectByProjectName();
+        updateStars();
 
     }];
     return {
@@ -139,10 +137,30 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
             submitUrl: '=',
             userFullName: '=',
             urlReferrer: '=',
-            logsEnabled: "="
+            logsEnabled: "=",
+            feedbackInputHeight: "=",
+            feedbackMaxNumberOfAttachments: "=",
+            feedbackAttachmentMaxSize: "=",
+            feedbackAttachmentImageMaxHeight: "=",
+            feedbackAttachmentImageMaxWidth: "="
         },
         controller: controller,
         link: function (scope) {
+
+            if (!scope.feedbackInputHeight)
+                scope.feedbackInputHeight = 100;
+
+            if (!scope.feedbackAttachmentMaxSize)
+                scope.feedbackAttachmentMaxSize = (1024 * 1024) * 2;
+
+            if (!scope.feedbackAttachmentImageMaxHeight)
+                scope.feedbackAttachmentImageMaxHeight = 1000;
+
+            if (!scope.feedbackAttachmentImageMaxWidth)
+                scope.feedbackAttachmentImageMaxWidth = 1000;
+
+            if (!scope.feedbackMaxNumberOfAttachments)
+                scope.feedbackMaxNumberOfAttachments = 5;
 
             if (scope.logsEnabled) {
                 console.log(scope.projectName);
