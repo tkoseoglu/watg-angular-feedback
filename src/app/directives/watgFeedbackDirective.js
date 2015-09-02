@@ -2,6 +2,7 @@
  * Created by Kemal on 07/30/15.
  */
 watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
+
     var controller = ['$scope', function ($scope) {
 
         $scope.header = 'Feedback';
@@ -95,8 +96,8 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
         $scope.toggle = function (index) {
             $scope.ratingValue = index + 1;
         };
-        $scope.$watch('ratingValue', function (oldValue, newValue) {
-            if (newValue) {
+        $scope.$watch('ratingValue', function (oldValue) {
+            if (oldValue) {
                 updateStars();
             }
         });
@@ -128,6 +129,8 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
         updateStars();
 
     }];
+
+
     return {
         restrict: 'E',
         templateUrl: 'app/templates/watgFeedbackTemplate.html',
