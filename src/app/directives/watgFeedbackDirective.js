@@ -8,25 +8,12 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
         $scope.isBusySubmittingFeedback = false;
         $scope.showConfirmation = false;
         $scope.form = {};
-        $scope.feedbackItem = {
-            feedback: '',
-            applicationId: 0,
-            applicationName: '',
-            applicationDescription: '',
-            applicationVersion: '',
-            vendor: '',
-            platform: '',
-            userAgent: '',
-            screenResolution: '',
-            rating: null
-        };
         $scope.max = 5;
         $scope.stars = [];
         $scope.ratingValue = 3;
-
         $scope.feebackContentResetCount = [];
         $scope.feedbackConfig = {
-            height: 300,             //default 300
+            height: 100,             //default 300
             multiLine: true,       //default true
             bootstrapCssPath: 'public/css/vendor.min.css',
             showVariablesSelector: true,
@@ -51,38 +38,58 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
             showRemoveLink: true,
             showSourceCode: false
         };
+        $scope.attachmentMaxSize = (1024 * 1024) / 5;
+        $scope.attachmentMaxImageHeight = 1000;
+        $scope.attachmentMaxImageWidth = 1000;
+        $scope.attachmentUploadIsBusy = false;
+        $scope.attachmentUploadMessages = [];
 
+        $scope.appDevProjectUI = {
+            AppDevProjectId: 0,
+            AppDevProjectName: '',
+            AppDevProjectDescription: '',
+            AppDevProjectVersion: '',
 
-        $scope.getProjectDetails = function () {
+            FeedbackContent: '',
+            Vendor: '',
+            Platform: '',
+            UserAgent: '',
+            ScreenResolution: '',
+            Rating: null,
+            Files: []
+        };
+
+        $scope.getAppDevProjectByProjectName = function () {
             $scope.isBusy = true;
-            watgFeedbackService.getProjectDetails($scope.getUrl + '/' + $scope.projectName).then(function (result) {
-                $scope.feedbackItem.applicationId = result.Id;
-                $scope.feedbackItem.applicationName = result.ProjectName;
-                $scope.feedbackItem.applicationDescription = result.ProjectDescription;
-                $scope.feedbackItem.applicationVersion = result.Version;
+            watgFeedbackService.getAppDevProjectByProjectName($scope.getUrl + '/' + $scope.projectName).then(function (result) {
+                $scope.appDevProjectUI.AppDevProjectId = result.AppDevProjectId;
+                $scope.appDevProjectUI.AppDevProjectName = result.AppDevProjectName;
+                $scope.appDevProjectUI.AppDevProjectDescription = result.AppDevProjectDescription;
+                $scope.appDevProjectUI.AppDevProjectVersion = result.AppDevProjectVersion;
                 $scope.isBusy = false;
             });
         };
-        $scope.submitFeedback = function () {
+
+        $scope.submitAppDevProjectFeedback = function () {
 
             $scope.isBusySubmittingFeedback = true;
 
-            $scope.feedbackItem.vendor = navigator.vendor;
-            $scope.feedbackItem.platform = navigator.platform;
-            $scope.feedbackItem.userAgent = navigator.userAgent;
-            $scope.feedbackItem.screenResolution = screen.width + '*' + screen.height;
-            $scope.feedbackItem.rating = $scope.ratingValue;
+            $scope.appDevProjectUI.Vendor = navigator["appMinorVersion"];
+            $scope.appDevProjectUI.Platform = navigator["platform"];
+            $scope.appDevProjectUI.UserAgent = navigator["userAgent"];
+            $scope.appDevProjectUI.ScreenResolution = window.screen.availWidth + '*' + window.screen.availHeight;
+            $scope.appDevProjectUI.Rating = $scope.ratingValue;
 
             if ($scope.urlReferrer)
-                $scope.feedbackItem.feedback += "<br />(Previous page) " + $scope.urlReferrer;
+                $scope.appDevProjectUI.FeedbackContent += "<br />(Previous page) " + $scope.urlReferrer;
 
-            watgFeedbackService.addProjectFeedback($scope.feedbackItem, $scope.submitUrl).then(function (result) {
+            watgFeedbackService.submitAppDevProjectFeedback($scope.appDevProjectUI, $scope.submitUrl).then(function (result) {
 
                 console.log(result);
                 var transactionResult = result;
 
                 if (transactionResult.HasError === true)
-                    consoloe.error('Feedback Error ' + transactionResult.Message);
+                    console.error('Feedback Error ' + transactionResult.Message);
 
                 $scope.showConfirmation = true;
                 $scope.isBusySubmittingFeedback = false;
@@ -99,21 +106,17 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
         });
         $scope.$watch('projectName', function (oldValue, newValue) {
             if (newValue) {
-                $scope.getProjectDetails();
+                $scope.getAppDevProjectByProjectName();
             }
         });
-        $scope.$watch('feedbackItem.feedback', function (newValue, oldValue) {
+        $scope.$watch('appDevProjectUI.FeedbackContent', function (newValue) {
 
             if (newValue === "" || newValue === "<br>")
                 $scope.form.inputForm.$setValidity("message", false);
             else
                 $scope.form.inputForm.$setValidity("message", true);
 
-            console.log('rich text changed');
         });
-
-
-        $scope.getProjectDetails();
 
         function updateStars() {
             $scope.stars = [];
@@ -124,6 +127,8 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
             }
         }
 
+        $scope.getAppDevProjectByProjectName();
+
     }];
     return {
         restrict: 'E',
@@ -133,17 +138,21 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
             getUrl: '=',
             submitUrl: '=',
             userFullName: '=',
-            urlReferrer: '='
+            urlReferrer: '=',
+            logsEnabled: "="
         },
         controller: controller,
         link: function (scope) {
 
-            console.log(scope.projectName);
-            console.log(scope.getUrl);
-            console.log(scope.submitUrl);
-            console.log(scope.userFullName);
+            if (scope.logsEnabled) {
+                console.log(scope.projectName);
+                console.log(scope.getUrl);
+                console.log(scope.submitUrl);
+                console.log(scope.userFullName);
+                console.log(scope.urlReferrer);
+            }
+
 
         }
-
     }
 });

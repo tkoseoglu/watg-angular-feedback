@@ -19,11 +19,15 @@ var watgFeedbackModule = angular.module('watgFeedback', ['ngRoute', 'watgFeedbac
 
 "use strict";
 watgFeedbackModule.controller('watgFeedbackTestController',
-    function watgFeedbackTestController($scope) {
+    function watgFeedbackTestController($scope, $window) {
         $scope.header = 'Feedback';
 
-        $scope.getProjectDetailsUrl = 'http://itstage.watg.com/watgxapirest/api/Feedback/GetProjectDetails/';
-        $scope.submitProjectFeedbackUrl = 'http://itstage.watg.com/watgxapirest/api/Feedback/AddProjectFeedback';
+        //var feedbackServiceLocation = "http://localhost:12240/api/Feedback/";
+
+        var feedbackServiceLocation = "http://localhost/WATGx.API.REST.Web/api/Feedback/";
+
+        $scope.getAppDevProjectByProjectNameUrl = feedbackServiceLocation + 'GetAppDevProjectByProjectName';
+        $scope.submitAppDevProjectFeedbackUrl = feedbackServiceLocation + 'SubmitAppDevProjectFeedback';
         $scope.user = {
             FullName: 'Tolga Koseoglu'
         };
@@ -41,25 +45,12 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
         $scope.isBusySubmittingFeedback = false;
         $scope.showConfirmation = false;
         $scope.form = {};
-        $scope.feedbackItem = {
-            feedback: '',
-            applicationId: 0,
-            applicationName: '',
-            applicationDescription: '',
-            applicationVersion: '',
-            vendor: '',
-            platform: '',
-            userAgent: '',
-            screenResolution: '',
-            rating: null
-        };
         $scope.max = 5;
         $scope.stars = [];
         $scope.ratingValue = 3;
-
         $scope.feebackContentResetCount = [];
         $scope.feedbackConfig = {
-            height: 300,             //default 300
+            height: 100,             //default 300
             multiLine: true,       //default true
             bootstrapCssPath: 'public/css/vendor.min.css',
             showVariablesSelector: true,
@@ -84,38 +75,58 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
             showRemoveLink: true,
             showSourceCode: false
         };
+        $scope.attachmentMaxSize = (1024 * 1024) / 5;
+        $scope.attachmentMaxImageHeight = 1000;
+        $scope.attachmentMaxImageWidth = 1000;
+        $scope.attachmentUploadIsBusy = false;
+        $scope.attachmentUploadMessages = [];
 
+        $scope.appDevProjectUI = {
+            AppDevProjectId: 0,
+            AppDevProjectName: '',
+            AppDevProjectDescription: '',
+            AppDevProjectVersion: '',
 
-        $scope.getProjectDetails = function () {
+            FeedbackContent: '',
+            Vendor: '',
+            Platform: '',
+            UserAgent: '',
+            ScreenResolution: '',
+            Rating: null,
+            Files: []
+        };
+
+        $scope.getAppDevProjectByProjectName = function () {
             $scope.isBusy = true;
-            watgFeedbackService.getProjectDetails($scope.getUrl + '/' + $scope.projectName).then(function (result) {
-                $scope.feedbackItem.applicationId = result.Id;
-                $scope.feedbackItem.applicationName = result.ProjectName;
-                $scope.feedbackItem.applicationDescription = result.ProjectDescription;
-                $scope.feedbackItem.applicationVersion = result.Version;
+            watgFeedbackService.getAppDevProjectByProjectName($scope.getUrl + '/' + $scope.projectName).then(function (result) {
+                $scope.appDevProjectUI.AppDevProjectId = result.AppDevProjectId;
+                $scope.appDevProjectUI.AppDevProjectName = result.AppDevProjectName;
+                $scope.appDevProjectUI.AppDevProjectDescription = result.AppDevProjectDescription;
+                $scope.appDevProjectUI.AppDevProjectVersion = result.AppDevProjectVersion;
                 $scope.isBusy = false;
             });
         };
-        $scope.submitFeedback = function () {
+
+        $scope.submitAppDevProjectFeedback = function () {
 
             $scope.isBusySubmittingFeedback = true;
 
-            $scope.feedbackItem.vendor = navigator.vendor;
-            $scope.feedbackItem.platform = navigator.platform;
-            $scope.feedbackItem.userAgent = navigator.userAgent;
-            $scope.feedbackItem.screenResolution = screen.width + '*' + screen.height;
-            $scope.feedbackItem.rating = $scope.ratingValue;
+            $scope.appDevProjectUI.Vendor = navigator["appMinorVersion"];
+            $scope.appDevProjectUI.Platform = navigator["platform"];
+            $scope.appDevProjectUI.UserAgent = navigator["userAgent"];
+            $scope.appDevProjectUI.ScreenResolution = window.screen.availWidth + '*' + window.screen.availHeight;
+            $scope.appDevProjectUI.Rating = $scope.ratingValue;
 
             if ($scope.urlReferrer)
-                $scope.feedbackItem.feedback += "<br />(Previous page) " + $scope.urlReferrer;
+                $scope.appDevProjectUI.FeedbackContent += "<br />(Previous page) " + $scope.urlReferrer;
 
-            watgFeedbackService.addProjectFeedback($scope.feedbackItem, $scope.submitUrl).then(function (result) {
+            watgFeedbackService.submitAppDevProjectFeedback($scope.appDevProjectUI, $scope.submitUrl).then(function (result) {
 
                 console.log(result);
                 var transactionResult = result;
 
                 if (transactionResult.HasError === true)
-                    consoloe.error('Feedback Error ' + transactionResult.Message);
+                    console.error('Feedback Error ' + transactionResult.Message);
 
                 $scope.showConfirmation = true;
                 $scope.isBusySubmittingFeedback = false;
@@ -132,21 +143,17 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
         });
         $scope.$watch('projectName', function (oldValue, newValue) {
             if (newValue) {
-                $scope.getProjectDetails();
+                $scope.getAppDevProjectByProjectName();
             }
         });
-        $scope.$watch('feedbackItem.feedback', function (newValue, oldValue) {
+        $scope.$watch('appDevProjectUI.FeedbackContent', function (newValue) {
 
             if (newValue === "" || newValue === "<br>")
                 $scope.form.inputForm.$setValidity("message", false);
             else
                 $scope.form.inputForm.$setValidity("message", true);
 
-            console.log('rich text changed');
         });
-
-
-        $scope.getProjectDetails();
 
         function updateStars() {
             $scope.stars = [];
@@ -157,6 +164,8 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
             }
         }
 
+        $scope.getAppDevProjectByProjectName();
+
     }];
     return {
         restrict: 'E',
@@ -166,16 +175,90 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
             getUrl: '=',
             submitUrl: '=',
             userFullName: '=',
-            urlReferrer: '='
+            urlReferrer: '=',
+            logsEnabled: "="
         },
         controller: controller,
         link: function (scope) {
 
-            console.log(scope.projectName);
-            console.log(scope.getUrl);
-            console.log(scope.submitUrl);
-            console.log(scope.userFullName);
+            if (scope.logsEnabled) {
+                console.log(scope.projectName);
+                console.log(scope.getUrl);
+                console.log(scope.submitUrl);
+                console.log(scope.userFullName);
+                console.log(scope.urlReferrer);
+            }
 
+
+        }
+    }
+});
+/**
+ * Created by Kemal on 09/01/15.
+ */
+watgFeedbackModule.directive("wgFileSelect", function () {
+
+    return {
+        restrict: 'A',
+        scope: {
+            files: '=files',
+            maxFileSize: '=maxFileSize',
+            maxImageHeight: '=maxImageHeight',
+            maxImageWidth: '=maxImageWidth',
+            messages: '=',
+            isBusy: '=',
+            imageSrc: "="
+        },
+        link: function (scope, element) {
+            element.bind("change", function (e) {
+                scope.messages = [];
+                var selectedFiles = (e.srcElement || e.target).files;
+                if (selectedFiles) {
+                    for (var i = 0; i < selectedFiles.length; i++) {
+
+                        scope.isBusy = true;
+                        scope.$apply();
+
+                        var selectedFile = selectedFiles[i];
+                        var reader = new FileReader();
+                        var image = new Image();
+
+                        reader.readAsDataURL(selectedFile);
+                        reader.onload = (function (theFile) {
+                            return function (e) {
+
+                                var isValid = true;
+
+                                image.src = e.target.result;
+                                scope.imageSrc = image.src;
+
+                                if (image.height > scope.maxImageHeight) {
+                                    isValid = false;
+                                    scope.messages.push("Image " + theFile.name + " (" + image.height + "px) exceeds the max height limit of " + scope.maxImageHeight + "px.");
+                                }
+                                if (image.width > scope.maxImageWidth) {
+                                    isValid = false;
+                                    scope.messages.push("Image " + theFile.name + " (" + image.width + "px) exceeds the max width limit of " + scope.maxImageHeight + "px.");
+                                }
+                                if (theFile.size > scope.maxFileSize) {
+                                    isValid = false;
+                                    scope.messages.push("File " + theFile.name + " (" + (theFile.size / (1024 * 1024)).toFixed(2) + " MB) exceeds the max size limit of " + (scope.maxFileSize / (1024 * 1024)) + " MB.");
+                                }
+
+                                if (isValid)
+                                    scope.files.push(theFile);
+
+                                scope.isBusy = false;
+                                scope.$apply();
+                            };
+                        })(selectedFile);
+
+                    }
+                }
+                else {
+                    scope.messages.push("File not found");
+                }
+            })
         }
 
     }
@@ -187,7 +270,7 @@ watgFeedbackModule.directive("watgFeedback", function (watgFeedbackService) {
 watgFeedbackModule.factory('watgFeedbackService', function ($http) {
 
     return {
-        getProjectDetails: function (url) {
+        getAppDevProjectByProjectName: function (url) {
             console.log(url);
             return $http({
                 method: 'GET',
@@ -198,19 +281,38 @@ watgFeedbackModule.factory('watgFeedbackService', function ($http) {
                     return response.data;
                 });
         },
-        addProjectFeedback: function (vm, url) {
-            console.log(vm);
-            console.log(url);
+        submitAppDevProjectFeedback: function (vm, url) {
+
+            console.log('Service 2 ' + url);
+
+            var formData = new FormData();
+            formData.append('FeedbackContent', vm.FeedbackContent);
+            formData.append('Vendor', vm.Vendor);
+            formData.append('Platform', vm.Platform);
+            formData.append('UserAgent', vm.UserAgent);
+            formData.append('ScreenResolution', vm.ScreenResolution);
+            formData.append('Rating', vm.Rating);
+            formData.append('AppDevProjectId', vm.AppDevProjectId);
+            for (var i = 0; i < vm.Files.length; i++) {
+                formData.append("Files[" + i + "]", vm.Files[i]);
+            }
+
             return $http({
+                url: url,
                 method: 'POST',
-                data: $.param(vm),
+                transformRequest: angular.identity,
+                data: formData,
                 withCredentials: true,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                url: url
+                headers: {
+                    'Content-Type': undefined
+                }
             }).
                 then(function (response) {
+                    console.timeEnd('Posting Note');
                     return response.data;
                 });
+
+
         }
     }
 

@@ -5,7 +5,7 @@
 watgFeedbackModule.factory('watgFeedbackService', function ($http) {
 
     return {
-        getProjectDetails: function (url) {
+        getAppDevProjectByProjectName: function (url) {
             console.log(url);
             return $http({
                 method: 'GET',
@@ -16,19 +16,38 @@ watgFeedbackModule.factory('watgFeedbackService', function ($http) {
                     return response.data;
                 });
         },
-        addProjectFeedback: function (vm, url) {
-            console.log(vm);
-            console.log(url);
+        submitAppDevProjectFeedback: function (vm, url) {
+
+            console.log('Service 2 ' + url);
+
+            var formData = new FormData();
+            formData.append('FeedbackContent', vm.FeedbackContent);
+            formData.append('Vendor', vm.Vendor);
+            formData.append('Platform', vm.Platform);
+            formData.append('UserAgent', vm.UserAgent);
+            formData.append('ScreenResolution', vm.ScreenResolution);
+            formData.append('Rating', vm.Rating);
+            formData.append('AppDevProjectId', vm.AppDevProjectId);
+            for (var i = 0; i < vm.Files.length; i++) {
+                formData.append("Files[" + i + "]", vm.Files[i]);
+            }
+
             return $http({
+                url: url,
                 method: 'POST',
-                data: $.param(vm),
+                transformRequest: angular.identity,
+                data: formData,
                 withCredentials: true,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                url: url
+                headers: {
+                    'Content-Type': undefined
+                }
             }).
                 then(function (response) {
+                    console.timeEnd('Posting Note');
                     return response.data;
                 });
+
+
         }
     }
 

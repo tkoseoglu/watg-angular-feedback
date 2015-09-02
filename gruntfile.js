@@ -27,6 +27,7 @@ module.exports = function (grunt) {
             appdist: {
                 src: ['src/app/appdist.js',
                     'src/app/directives/watgFeedbackDirective.js',
+                    'src/app/directives/watgFeedbackFileSelectDirective.js',
                     'src/app/services/watgFeedbackService.js'],
                 dest: 'dist/js/watg-angular-feedback.js'
             },
@@ -34,6 +35,7 @@ module.exports = function (grunt) {
                 src: ['src/app/app.js',
                     'src/app/controllers/watgFeedbackTestController.js',
                     'src/app/directives/watgFeedbackDirective.js',
+                    'src/app/directives/watgFeedbackFileSelectDirective.js',
                     'src/app/services/watgFeedbackService.js'],
                 dest: 'dev/js/watg-angular-feedback.js'
             },
@@ -156,7 +158,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['concat', 'uglify', 'concat_css', 'cssmin', 'copy']);
+    grunt.registerTask('default', ['concat', 'uglify', 'concat_css', 'cssmin', 'copy', 'watch']);
     grunt.registerTask('dist', ['concat:appdist', 'uglify:appdist', 'concat_css:assetsdist', 'cssmin:assetsdist', 'html2js']);
 
 
