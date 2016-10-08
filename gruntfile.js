@@ -1,53 +1,89 @@
 /**
  * Created by Kemal on 07/30/15.
  */
-/*
- * CONCAT APP JS
- * CONCAT ASSET CSS
- * CONCAT VENDOR JS
- * CONCAT VENDOR CSS
- * WATCH APP JS
- * WATCH ASSET CSS
- * COPY ICONS
- * COPY FONTS
- * CONDITIONAL GRUNT DEV VS PROD
- *
- * NICE TO HAVS
- * NOT HAVING TO EXPLICTLY INCLUDE VENDOR .JS OR .CSS
- *
- * NPM, bower, grunt
- *
- */
-
-
-module.exports = function (grunt) {
+var localServerAddress = "10.10.9.97"; //when server is VPNed into WATG
+module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        ngconstant: {
+            // Options for all targets
+            options: {
+                space: " ",
+                dest: "src/app/core/app.const.js",
+                name: "watgFeedbackModule.const"
+            },
+            // Environment targets
+            dev: {
+                constants: {
+                    "CONST_WATGXRESTAPIURL": "http://" + localServerAddress + "/watgxapirest/api",
+                    "CONST_RESOURCEURL": "http://" + localServerAddress + ":8080",
+                    "CONST_LOGSENABLED": true
+                }
+            },
+            stage: {
+                constants: {
+                    "CONST_WATGXRESTAPIURL": "http://itstage.watg.com/watgxapirest/api",
+                    "CONST_RESOURCEURL": "http://resources.watg.com",
+                    "CONST_LOGSENABLED": true
+                }
+            },
+            prod: {
+                constants: {
+                    "CONST_WATGXRESTAPIURL": "http://itworks.watg.com/watgxapirest/api",
+                    "CONST_RESOURCEURL": "http://resources.watg.com",
+                    "CONST_LOGSENABLED": false
+                }
+            }
+        },
+        connect: {
+            dev: {
+                options: {
+                    port: 9023,
+                    livereload: true,
+                    debug: true,
+                    target: 'http://localhost:9023/index.html', // target url to open
+                    open: true
+                }
+            },
+            test: {
+                options: {
+                    port: 9023,
+                    keepalive: false
+                }
+            }
+        },
+        jshint: {
+            beforeconcat: ["gruntfile.js", "app/**/*.js"]
+        },
         concat: {
             appdist: {
                 src: ['src/app/appdist.js',
-                    'src/app/directives/watgFeedbackDirective.js',
-                    'src/app/directives/watgFeedbackFileSelectDirective.js',
-                    'src/app/services/watgFeedbackService.js'],
+                      'src/app/directives/watgFeedbackDirective.js',
+                      'src/app/services/watgFeedbackService.js'
+                ],
                 dest: 'dist/js/watg-angular-feedback.js'
             },
             app: {
                 src: ['src/app/app.js',
-                    'src/app/controllers/watgFeedbackTestController.js',
-                    'src/app/directives/watgFeedbackDirective.js',
-                    'src/app/directives/watgFeedbackFileSelectDirective.js',
-                    'src/app/services/watgFeedbackService.js'],
+                      'src/app/core/app.const.js',
+                      'src/app/core/app.config.js',
+                      'src/app/tests/watgFeedbackTestController.js',
+                      'src/app/directives/watgFeedbackDirective.js',
+                      'src/app/services/watgFeedbackService.js'
+                ],
                 dest: 'dev/js/watg-angular-feedback.js'
             },
             vendor: {
                 src: [
-                    'bower_components/jquery/dist/jquery.min.js',
+                    'bower_components/jquery/jquery.min.js',
                     'bower_components/bootstrap/dist/js/bootstrap.min.js',
                     'bower_components/angular/angular.min.js',
                     'bower_components/angular-sanitize/angular-sanitize.min.js',
                     'bower_components/angular-route/angular-route.min.js',
                     'bower_components/watg-angular-richtext/dist/js/watg-angular-richtext.min.js',
-                    'bower_components/watg-angular-richtext/dist/js/watg-angular-richtext.tpl.js'
+                    'bower_components/watg-angular-richtext/dist/js/watg-angular-richtext.tpl.js',
+                    'bower_components/watg-angular-fileupload/dist/js/watg-angular-fileupload.min.js',
+                    'bower_components/watg-angular-fileupload/dist/js/watg-angular-fileupload.tpl.js'
                 ],
                 dest: 'dev/js/vendor.min.js'
             }
@@ -144,12 +180,14 @@ module.exports = function (grunt) {
                 }
             },
             main: {
-                src: ['src/app/templates/*.html'],
+                src: ['src/app/directives/templates/*.html'],
                 dest: 'dist/js/watg-angular-feedback.tpl.js'
             }
         }
     });
-
+    grunt.loadNpmTasks('grunt-ng-constant');
+    grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks('grunt-concat-css');
     grunt.loadNpmTasks('grunt-html2js');
     grunt.loadNpmTasks('grunt-contrib-concat');
@@ -157,9 +195,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
-
-    grunt.registerTask('default', ['concat', 'uglify', 'concat_css', 'cssmin', 'copy']);//, 'watch'
-    grunt.registerTask('dist', ['concat:appdist', 'uglify:appdist', 'concat_css:assetsdist', 'cssmin:assetsdist', 'html2js']);
-
-
+    grunt.registerTask('dev', ['ngconstant:dev', "jshint", 'concat', 'uglify', 'concat_css', 'cssmin', 'copy', 'connect:dev', 'watch']); //, 'watch'
+    grunt.registerTask('dist', ['concat:appdist', 'uglify:appdist', 'concat_css:assetsdist', 'cssmin:assetsdist', 'copy:dist', 'html2js']);
 };

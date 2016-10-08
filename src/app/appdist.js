@@ -1,8 +1,11 @@
 /**
  * Created by Kemal on 07/30/15.
  */
-var watgFeedbackModule = angular.module('watgFeedback', ['watgFeedback.templates', 'watgRichtext'])
-    .config(function ($httpProvider) {
-        $httpProvider.defaults.useXDomain = true;
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
-    });
+(function() {
+    "use strict";
+    var modules = ['ngRoute',
+    'watgFeedback.templates',
+    'watgRichtext',
+    'watgFileuploadModule'];
+    var watgFeedbackModule = angular.module('watgFeedbackApp', modules);
+}());
