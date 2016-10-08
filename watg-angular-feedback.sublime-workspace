@@ -448,10 +448,38 @@
 	"buffers":
 	[
 		{
-			"file": "src/app/directives/watgFeedbackFileSelectDirective.js",
+			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 3242,
+				"buffer_size": 753,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "gruntfile.js",
+			"settings":
+			{
+				"buffer_size": 7854,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/app/core/app.config.js",
+			"settings":
+			{
+				"buffer_size": 925,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/app/directives/templates/watgFeedbackTemplate.html",
+			"settings":
+			{
+				"buffer_size": 2837,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
@@ -459,23 +487,8 @@
 			"file": "src/app/directives/watgFeedbackDirective.js",
 			"settings":
 			{
-				"buffer_size": 6198,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/app/app.js",
-			"settings":
-			{
-				"buffer_size": 580,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/app/services/watgFeedbackService.js",
-			"settings":
-			{
-				"buffer_size": 1635,
+				"buffer_size": 6807,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		}
@@ -590,17 +603,35 @@
 	"expanded_folders":
 	[
 		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback",
-		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/dev",
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/bower_components",
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/bower_components/watg-angular-fileupload/dist",
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/dev/css",
 		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/dev/js",
-		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/dist",
 		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/dist/js",
-		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/src",
 		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/src/app",
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/src/app/core",
 		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/src/app/directives",
-		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/src/app/templates"
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/src/app/directives/templates",
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/src/app/services",
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/src/app/tests",
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/src/assets"
 	],
 	"file_history":
 	[
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/.jsbeautifyrc",
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/src/app/tests/watgFeedbackTestView.html",
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/src/app/tests/watgFeedbackTestController.js",
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/src/app/services/watgFeedbackService.js",
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/gruntfile.js",
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/src/app/app.js",
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/index.html",
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/package.json",
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/src/app/directives/watgFeedbackDirective.js",
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/src/app/appdist.js",
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/src/default.html",
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/bower.json",
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/src/app/directives/templates/watgFeedbackTemplate.html",
+		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/src/app/directives/watgFeedbackFileSelectDirective.js",
 		"/D/Tolga/Code/WATG/WATG GitHub/watg-angular-feedback/src/assets/watg-angular-feedback.css",
 		"/D/Tolga/Code/WATG/WATG Employee Review/WATG.EmployeeReview.Web/app/services/reviewsService.js",
 		"/D/Tolga/Code/WATG/WATG Employee Review/WATG.EmployeeReview.Web/app/services/ratingsService.js",
@@ -714,25 +745,11 @@
 		"/D/Tolga/Code/LATA/METRA/Schedule Manager/meanstack/public/app/views/scheduleEditorView.html",
 		"/D/Tolga/Code/LATA/METRA/Schedule Manager/meanstack/Gruntfile.js",
 		"/D/Tolga/Code/LATA/METRA/Schedule Manager/meanstack/app/controllers/exportexcel.promise.server.controller.js",
-		"/D/Tolga/Code/LATA/METRA/Schedule Manager/meanstack/public/index.html",
-		"/D/Tolga/Code/LATA/METRA/Schedule Manager/meanstack/public/app/controllers/scheduleManagerController.js",
-		"/D/Tolga/Code/LATA/METRA/Schedule Manager/meanstack/bower.json",
-		"/D/Tolga/Code/LATA/METRA/Schedule Manager/meanstack/public/libExt/jsPDF/png.js",
-		"/D/Tolga/Code/LATA/METRA/Schedule Manager/meanstack/public/libExt/jsPDF/zlib.js",
-		"/D/Tolga/Code/LATA/METRA/Schedule Manager/meanstack/public/app/templates/smScheduleExportTemplate.html",
-		"/D/Tolga/Code/LATA/METRA/Schedule Manager/meanstack/public/app/directives/smScheduleExportDirective.js",
-		"/D/Tolga/Code/LATA/METRA/Schedule Manager/meanstack/public/app/services/exportService.js",
-		"/D/Tolga/Code/LATA/METRA/Schedule Manager/meanstack/public/app/views/scheduleManagerView.html",
-		"/D/Tolga/Code/LATA/METRA/Schedule Manager/meanstack/public/app/controllers/stringlineEditorController.js",
-		"/D/Tolga/Code/LATA/METRA/Schedule Manager/meanstack/app/routes/exportexcel.server.routes.js",
-		"/D/Tolga/Code/LATA/METRA/Schedule Manager/meanstack/dbHelp.html",
-		"/D/Tolga/Code/LATA/METRA/Schedule Manager/meanstack/app/controllers/exporttext.promise.server.controller.js",
-		"/D/Tolga/Code/LATA/METRA/Schedule Manager/meanstack/app/controllers/exportpdf.promise.server.controller.js",
-		"/D/Tolga/Code/LATA/METRA/Schedule Manager/meanstack/public/app/controllers/spritesController.js"
+		"/D/Tolga/Code/LATA/METRA/Schedule Manager/meanstack/public/index.html"
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 36.0
 	},
 	"find_in_files":
 	{
@@ -746,6 +763,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"getUrl",
 			"a",
 			">\n",
 			"isAuthenticated",
@@ -872,8 +890,7 @@
 			"stopTimeEditWidth",
 			"stopTimeEditHeight",
 			"tripEditWidth",
-			"tripEditHeight",
-			"stopTimeWidth"
+			"tripEditHeight"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -892,114 +909,55 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 4,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/app/directives/watgFeedbackFileSelectDirective.js",
+					"file": "index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3242,
+						"buffer_size": 753,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3242,
-								3242
+								495,
+								495
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
+							"is_xml": false,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 3,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "src/app/directives/watgFeedbackDirective.js",
+					"file": "gruntfile.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6198,
+						"buffer_size": 7854,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4975,
-								4975
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1620.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "src/app/app.js",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 580,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "src/app/services/watgFeedbackService.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1635,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								253,
-								253
+								67,
+								77
 							]
 						],
 						"settings":
@@ -1013,6 +971,98 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/app/core/app.config.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 925,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								272,
+								272
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/app/directives/templates/watgFeedbackTemplate.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2837,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2672,
+								2672
+							]
+						],
+						"settings":
+						{
+							"is_xml": false,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 3,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/app/directives/watgFeedbackDirective.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6807,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								457,
+								457
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 60.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]

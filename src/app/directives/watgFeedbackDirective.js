@@ -11,10 +11,8 @@
         $scope.showConfirmation = false;
         $scope.form = {};
         $scope.max = 5;
-        $scope.stars = [];
         $scope.ratingValue = 0;
-        $scope.attachmentUploadIsBusy = false;
-        $scope.attachmentUploadMessages = [];
+        $scope.stars = [];
         $scope.feebackContentResetCount = [];
         $scope.reset = function() {
             $scope.appDevProjectUI = {
@@ -34,6 +32,7 @@
                 Title: "Attachments",
                 Files: [],
                 MaxFileSize: 1024 * 1024 * 5,
+                MaxNumberOfFiles: 5,
                 AllowedFileExtensions: "png,jpg,doc,docx,pdf"
             };
             $scope.feedbackRichtextConfig = {
@@ -107,9 +106,6 @@
             if (newValue === "" || newValue === "<br>") $scope.form.inputForm.$setValidity("message", false);
             else $scope.form.inputForm.$setValidity("message", true);
         });
-        $scope.$watchCollection("appDevProjectUI.Files", function(newValue, oldValue) {
-            $scope.attachmentUploadMessages = [];
-        });
 
         function updateStars() {
             $scope.stars = [];
@@ -122,7 +118,6 @@
         $scope.getAppDevProjectByProjectName();
         $scope.reset();
         updateStars();
-
     }];
 
     function watgFeedback() {

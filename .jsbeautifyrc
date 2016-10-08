@@ -3,7 +3,7 @@
         "indent_char": " ",
         "indent_size": 3,
         "wrap_line_length": 25,
-        "unformatted": []
+        "unformatted": ["small"]
     },
     "js": {
         "allowed_file_extensions": ["js", "json", "jshintrc", "jsbeautifyrc", "sublime-keymap"],

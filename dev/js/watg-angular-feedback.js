@@ -14,9 +14,9 @@
 
 angular.module('watgFeedbackModule.const', [])
 
-.constant('CONST_WATGXRESTAPIURL', 'http://10.10.9.97/watgxapirest/api')
+.constant('CONST_WATGXRESTAPIURL', 'http://10.10.9.98/watgxapirest/api')
 
-.constant('CONST_RESOURCEURL', 'http://10.10.9.97:8080')
+.constant('CONST_RESOURCEURL', 'http://10.10.9.98:8080')
 
 .constant('CONST_LOGSENABLED', true)
 
@@ -97,10 +97,8 @@ angular.module('watgFeedbackModule.const', [])
         $scope.showConfirmation = false;
         $scope.form = {};
         $scope.max = 5;
-        $scope.stars = [];
         $scope.ratingValue = 0;
-        $scope.attachmentUploadIsBusy = false;
-        $scope.attachmentUploadMessages = [];
+        $scope.stars = [];
         $scope.feebackContentResetCount = [];
         $scope.reset = function() {
             $scope.appDevProjectUI = {
@@ -120,6 +118,7 @@ angular.module('watgFeedbackModule.const', [])
                 Title: "Attachments",
                 Files: [],
                 MaxFileSize: 1024 * 1024 * 5,
+                MaxNumberOfFiles: 5,
                 AllowedFileExtensions: "png,jpg,doc,docx,pdf"
             };
             $scope.feedbackRichtextConfig = {
@@ -193,9 +192,6 @@ angular.module('watgFeedbackModule.const', [])
             if (newValue === "" || newValue === "<br>") $scope.form.inputForm.$setValidity("message", false);
             else $scope.form.inputForm.$setValidity("message", true);
         });
-        $scope.$watchCollection("appDevProjectUI.Files", function(newValue, oldValue) {
-            $scope.attachmentUploadMessages = [];
-        });
 
         function updateStars() {
             $scope.stars = [];
@@ -208,7 +204,6 @@ angular.module('watgFeedbackModule.const', [])
         $scope.getAppDevProjectByProjectName();
         $scope.reset();
         updateStars();
-
     }];
 
     function watgFeedback() {

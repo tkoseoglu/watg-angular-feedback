@@ -1,7 +1,7 @@
 /**
  * Created by Kemal on 07/30/15.
  */
-var localServerAddress = "10.10.9.97"; //when server is VPNed into WATG
+var localServerAddress = "10.10.9.98"; //when server is VPNed into WATG
 module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),

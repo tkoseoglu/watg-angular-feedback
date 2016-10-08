@@ -54,50 +54,6 @@
          </div>
          <div class="form-group" ng-class="{'has-error': form.inputForm.file.$invalid}">
             <watg-fileupload config="watgFileuploadConfig"></watg-fileupload>
-            <!-- <div ng-if="feedbackMaxNumberOfAttachments>1">
-               <label>Add Attachments
-                  (max.{{feedbackMaxNumberOfAttachments}})
-               </label>
-            </div>
-            <div ng-if="feedbackMaxNumberOfAttachments===1">
-               <label>Add Attachment</label>
-            </div>
-            <div>
-               <span class="btn btn-primary btn-file"
-                  ng-if="appDevProjectUI.Files.length < feedbackMaxNumberOfAttachments">
-                  <i class="fa fa-plus"></i>
-                  <input type="file" id="file"
-                     name="file"
-                     accept=".doc, .pdf, .xls, .xlsx, .docx, image/*"
-                     watg-feedback-fileselect
-                     files="appDevProjectUI.Files"
-                     max-file-size="feedbackAttachmentMaxSize"
-                     max-image-height="feedbackAttachmentImageMaxHeight"
-                     max-image-width="feedbackAttachmentImageMaxWidth"
-                     is-busy="attachmentUploadIsBusy"
-                     messages="attachmentUploadMessages"
-                  />
-               </span>
-            </div>
-            <br>
-            <div ng-show="attachmentUploadMessages.length > 0">
-               <div ng-repeat="m in attachmentUploadMessages">
-                  {{m}}
-               </div>
-            </div>
-            <div ng-show="appDevProjectUI.Files.length > 0">
-               <div class="attachedFileRow"
-                  ng-repeat="f in appDevProjectUI.Files">
-                  <div>
-                     <span>{{f.name}}</span>
-                  </div>
-                  <div>
-                     <i class="fa fa-remove idosomething"
-                        title="remove"
-                        ng-click="appDevProjectUI.Files.splice($index, 1)"></i>
-                  </div>
-               </div>
-            </div> -->
          </div>
          <hr/>
          <div class="form-group">
@@ -115,14 +71,9 @@
       </form>
       <div ng-show="showConfirmation">
          <h3>Thank you!
-            <small>Your feedback
-               has been successfully
-               recorded.
-            </small>
+            <small>Your feedback has been successfully recorded.</small>
          </h3>
       </div>
    </div>
-   <!--<div>-->
    <!--<pre>{{appDevProjectUI|json}}</pre>-->
-   <!--</div>-->
 </div>
