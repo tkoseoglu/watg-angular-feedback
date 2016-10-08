@@ -5,6 +5,7 @@
     "use strict";
     angular.module("watgFeedbackModule").directive("watgFeedback", watgFeedback);
     var controller = ['$scope', "watgFeedbackService", function($scope, watgFeedbackService) {
+        var boostrapCssPath = "dev/css/vendor.min.css";
         $scope.header = 'Feedback';
         $scope.isBusySubmittingFeedback = false;
         $scope.showConfirmation = false;
@@ -12,47 +13,55 @@
         $scope.max = 5;
         $scope.stars = [];
         $scope.ratingValue = 0;
-        $scope.feebackContentResetCount = [];
-        $scope.feedbackRichtextConfig = {
-            height: $scope.feedbackInputHeight, //default 300
-            multiLine: true, //default true
-            bootstrapCssPath: 'public/css/vendor.min.css',
-            showVariablesSelector: true,
-            showFontSelector: true,
-            showFontSizeSelector: true,
-            showColorSelector: true,
-            showBold: true,
-            showItalic: true,
-            showStrikeThrough: true,
-            showUnderline: true,
-            showUnorderedList: true,
-            showOrderedList: true,
-            showReduceIndent: true,
-            showIndent: true,
-            showLeftAlign: true,
-            showCenterAlign: true,
-            showRightAlign: true,
-            showJustify: true,
-            showUndo: true,
-            showRedo: true,
-            showInsertLink: true,
-            showRemoveLink: true,
-            showSourceCode: false
-        };
         $scope.attachmentUploadIsBusy = false;
         $scope.attachmentUploadMessages = [];
-        $scope.appDevProjectUI = {
-            AppDevProjectId: 0,
-            AppDevProjectName: '',
-            AppDevProjectDescription: '',
-            AppDevProjectVersion: '',
-            FeedbackContent: '',
-            Vendor: '',
-            Platform: '',
-            UserAgent: '',
-            ScreenResolution: '',
-            Rating: null,
-            Files: []
+        $scope.feebackContentResetCount = [];
+        $scope.reset = function() {
+            $scope.appDevProjectUI = {
+                AppDevProjectId: 0,
+                AppDevProjectName: '',
+                AppDevProjectDescription: '',
+                AppDevProjectVersion: '',
+                FeedbackContent: '',
+                Vendor: '',
+                Platform: '',
+                UserAgent: '',
+                ScreenResolution: '',
+                Rating: null,
+                Files: []
+            };
+            $scope.watgFileuploadConfig = {
+                Title: "Attachments",
+                Files: [],
+                MaxFileSize: 1024 * 1024 * 5,
+                AllowedFileExtensions: "png,jpg,doc,docx,pdf"
+            };
+            $scope.feedbackRichtextConfig = {
+                height: $scope.feedbackInputHeight,
+                multiLine: true,
+                bootstrapCssPath: boostrapCssPath,
+                showVariablesSelector: true,
+                showFontSelector: true,
+                showFontSizeSelector: true,
+                showColorSelector: true,
+                showBold: true,
+                showItalic: true,
+                showStrikeThrough: true,
+                showUnderline: true,
+                showUnorderedList: true,
+                showOrderedList: true,
+                showReduceIndent: true,
+                showIndent: true,
+                showLeftAlign: true,
+                showCenterAlign: true,
+                showRightAlign: true,
+                showJustify: true,
+                showUndo: true,
+                showRedo: true,
+                showInsertLink: true,
+                showRemoveLink: true,
+                showSourceCode: false
+            };
         };
         $scope.getAppDevProjectByProjectName = function() {
             $scope.isBusy = true;
@@ -72,12 +81,13 @@
             $scope.appDevProjectUI.ScreenResolution = window.screen.availWidth + '*' + window.screen.availHeight;
             $scope.appDevProjectUI.Rating = $scope.ratingValue;
             if ($scope.urlReferrer) $scope.appDevProjectUI.FeedbackContent += "<br />(Previous page) " + $scope.urlReferrer;
+            $scope.appDevProjectUI.Files = $scope.watgFileuploadConfig.Files;
             watgFeedbackService.submitAppDevProjectFeedback($scope.appDevProjectUI, $scope.submitUrl).then(function(result) {
-                console.log(result);
                 var transactionResult = result;
                 if (transactionResult.HasError === true) console.error('Feedback Error ' + transactionResult.Message);
                 $scope.showConfirmation = true;
                 $scope.isBusySubmittingFeedback = false;
+                $scope.reset();
             });
         };
         $scope.toggle = function(index) {
@@ -110,7 +120,9 @@
             }
         }
         $scope.getAppDevProjectByProjectName();
+        $scope.reset();
         updateStars();
+
     }];
 
     function watgFeedback() {

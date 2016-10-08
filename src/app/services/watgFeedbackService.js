@@ -8,7 +8,6 @@
     function watgFeedbackService($http) {
         return {
             getAppDevProjectByProjectName: function(url) {
-                console.log(url);
                 return $http({
                     method: 'GET',
                     withCredentials: true,

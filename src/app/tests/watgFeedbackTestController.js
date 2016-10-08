@@ -4,12 +4,10 @@
 
     function watgFeedbackTestController($scope, $window, CONST_WATGXRESTAPIURL) {
         $scope.header = 'Feedback';
-        //var feedbackServiceLocation = "http://localhost:12240/api/Feedback/";
-        var feedbackServiceLocation = CONST_WATGXRESTAPIURL + "/Feedback/";
         $scope.maxAttachmentSize = (1024 * 1024) * 1;
         $scope.maxNumberOfAttachments = 2;
-        $scope.getAppDevProjectByProjectNameUrl = feedbackServiceLocation + 'GetAppDevProjectByProjectName';
-        $scope.submitAppDevProjectFeedbackUrl = feedbackServiceLocation + 'SubmitAppDevProjectFeedback';
+        $scope.getAppDevProjectByProjectNameUrl = CONST_WATGXRESTAPIURL + '/Feedback/GetAppDevProjectByProjectName';
+        $scope.submitAppDevProjectFeedbackUrl = CONST_WATGXRESTAPIURL + '/Feedback/SubmitAppDevProjectFeedback';
         $scope.user = {
             FullName: 'Tolga Koseoglu'
         };

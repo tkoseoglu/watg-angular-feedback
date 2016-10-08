@@ -9,20 +9,25 @@
          novalidate ng-cloak
          ng-hide="showConfirmation">
          <div class="form-group">
-            <label>Application Name</label>
-            <br/>
-            <strong>{{appDevProjectUI.AppDevProjectName}}
-               {{appDevProjectUI.AppDevProjectVersion}}</strong>
+            <div>
+               Application Name
+            </div>
+            <div>
+               <strong>{{appDevProjectUI.AppDevProjectName}}
+                  {{appDevProjectUI.AppDevProjectVersion}}
+               </strong>
+            </div>
          </div>
          <div class="form-group">
-            <label>Application Details</label>
-            <br/>
-            <strong>{{appDevProjectUI.AppDevProjectDescription}}</strong>
+            <div>Application Details</div>
+            <div>
+               <strong>{{appDevProjectUI.AppDevProjectDescription}}</strong>
+            </div>
          </div>
          <div class="form-group" ng-class="{'has-error': form.inputForm.feedbackContent.$invalid}">
-            <label>Feedback from
+            <div>Feedback from
                <strong>{{userFullName}}</strong>
-            </label>
+            </div>
             <div>
                <watg-richtext-editor id="'feedbackContent'"
                   name="feedbackContent"
@@ -33,22 +38,26 @@
             </div>
          </div>
          <div class="form-group">
-            <label>Click stars to
-               rate</label>
-            <br/>
-            <ul class="star-rating">
-               <li ng-repeat="star in stars"
-                  class="star"
-                  ng-class="{filled: star.filled}"
-                  ng-click="toggle($index)">
-                  <i class="fa fa-star"></i>
-               </li>
-            </ul>
+            <div>
+               Click stars to rate
+            </div>
+            <div>
+               <ul class="star-rating">
+                  <li ng-repeat="star in stars"
+                     class="star"
+                     ng-class="{filled: star.filled}"
+                     ng-click="toggle($index)">
+                     <i class="fa fa-star"></i>
+                  </li>
+               </ul>
+            </div>
          </div>
          <div class="form-group" ng-class="{'has-error': form.inputForm.file.$invalid}">
-            <div ng-if="feedbackMaxNumberOfAttachments>1">
+            <watg-fileupload config="watgFileuploadConfig"></watg-fileupload>
+            <!-- <div ng-if="feedbackMaxNumberOfAttachments>1">
                <label>Add Attachments
-                  (max.{{feedbackMaxNumberOfAttachments}})</label>
+                  (max.{{feedbackMaxNumberOfAttachments}})
+               </label>
             </div>
             <div ng-if="feedbackMaxNumberOfAttachments===1">
                <label>Add Attachment</label>
@@ -88,7 +97,7 @@
                         ng-click="appDevProjectUI.Files.splice($index, 1)"></i>
                   </div>
                </div>
-            </div>
+            </div> -->
          </div>
          <hr/>
          <div class="form-group">
@@ -108,7 +117,8 @@
          <h3>Thank you!
             <small>Your feedback
                has been successfully
-               recorded.</small>
+               recorded.
+            </small>
          </h3>
       </div>
    </div>
