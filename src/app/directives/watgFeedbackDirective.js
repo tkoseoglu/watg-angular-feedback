@@ -152,7 +152,8 @@
     function watgFeedback() {
         return {
             restrict: 'E',
-            templateUrl: 'src/app/directives/templates/watgFeedbackTemplate.html',
+            //templateUrl: 'src/app/directives/templates/watgFeedbackTemplate.html',
+            templateUrl: 'app/directives/templates/watgFeedbackTemplate.html',
             scope: {
                 projectName: '=',
                 watgApiUrl: '=',
