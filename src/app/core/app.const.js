@@ -1,8 +1,8 @@
 angular.module('watgFeedbackModule.const', [])
 
-.constant('CONST_WATGXRESTAPIURL', 'http://10.10.9.98/watgxapirest/api')
+.constant('CONST_WATGXRESTAPIURL', 'http://192.168.0.7/watgApi/api')
 
-.constant('CONST_RESOURCEURL', 'http://10.10.9.98:8080')
+.constant('CONST_RESOURCEURL', 'http://192.168.0.7:8080')
 
 .constant('CONST_LOGSENABLED', true)
 

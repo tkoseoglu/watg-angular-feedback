@@ -6,8 +6,7 @@
         $scope.header = 'Feedback';
         $scope.maxAttachmentSize = (1024 * 1024) * 1;
         $scope.maxNumberOfAttachments = 2;
-        $scope.getAppDevProjectByProjectNameUrl = CONST_WATGXRESTAPIURL + '/Feedback/GetAppDevProjectByProjectName';
-        $scope.submitAppDevProjectFeedbackUrl = CONST_WATGXRESTAPIURL + '/Feedback/SubmitAppDevProjectFeedback';
+        $scope.watgApiUrl = CONST_WATGXRESTAPIURL;        
         $scope.user = {
             FullName: 'Tolga Koseoglu'
         };

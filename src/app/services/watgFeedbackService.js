@@ -13,9 +13,9 @@
                     withCredentials: true,
                     url: url
                 }).
-                then(function(response) {
-                    return response.data;
-                });
+                    then(function(response) {
+                        return response.data;
+                    });
             },
             submitAppDevProjectFeedback: function(vm, url) {
                 console.log('Service 2 ' + url);
@@ -40,10 +40,22 @@
                         'Content-Type': undefined
                     }
                 }).
-                then(function(response) {
-                    console.timeEnd('Posting Note');
-                    return response.data;
-                });
+                    then(function(response) {
+                        console.timeEnd('Posting Note');
+                        return response.data;
+                    });
+            },
+            sendEmail: function(email, url) {
+                console.log(email);
+                return $http({
+                    method: 'POST',
+                    withCredentials: true,
+                    url: url,
+                    data: email
+                }).
+                    then(function(response) {
+                        return response.data;
+                    });
             }
         };
     }

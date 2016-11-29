@@ -1,7 +1,7 @@
 /**
  * Created by Kemal on 07/30/15.
  */
-var localServerAddress = "10.10.9.98"; //when server is VPNed into WATG
+var localServerAddress = "192.168.0.7"; //when server is VPNed into WATG
 module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -15,14 +15,14 @@ module.exports = function(grunt) {
             // Environment targets
             dev: {
                 constants: {
-                    "CONST_WATGXRESTAPIURL": "http://" + localServerAddress + "/watgxapirest/api",
+                    "CONST_WATGXRESTAPIURL": "http://" + localServerAddress + "/watgApi/api",
                     "CONST_RESOURCEURL": "http://" + localServerAddress + ":8080",
                     "CONST_LOGSENABLED": true
                 }
             },
             stage: {
                 constants: {
-                    "CONST_WATGXRESTAPIURL": "http://itstage.watg.com/watgxapirest/api",
+                    "CONST_WATGXRESTAPIURL": "http://itstage.watg.com/watgApi/api",
                     "CONST_RESOURCEURL": "http://resources.watg.com",
                     "CONST_LOGSENABLED": true
                 }
@@ -196,5 +196,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.registerTask('dev', ['ngconstant:dev', "jshint", 'concat', 'uglify', 'concat_css', 'cssmin', 'copy', 'connect:dev', 'watch']); //, 'watch'
-    grunt.registerTask('dist', ['concat:appdist', 'uglify:appdist', 'concat_css:assetsdist', 'cssmin:assetsdist', 'copy:dist', 'html2js']);
+    grunt.registerTask('dist', ['concat:appdist', 'uglify:appdist', 'concat_css:assetsdist', 'cssmin:assetsdist', 'copy', 'html2js']);
 };
