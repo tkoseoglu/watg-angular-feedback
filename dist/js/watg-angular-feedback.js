@@ -7,7 +7,7 @@
     'watgFeedback.templates',
     'watgRichtext',
     'watgFileuploadModule'];
-    var watgFeedbackModule = angular.module('watgFeedbackApp', modules);
+    var watgFeedbackModule = angular.module('watgFeedbackModule', modules);
 }());
 
 /**
