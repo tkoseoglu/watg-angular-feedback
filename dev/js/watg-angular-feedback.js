@@ -24,10 +24,10 @@ angular.module('watgFeedbackModule.const', [])
 (function() {
     "use strict";
     var app = angular.module('watgFeedbackModule');
-    app.config(['$routeProvider', '$httpProvider', appConfig]);
+    app.config(['$httpProvider', '$routeProvider', appConfig]);
     app.run(appRun);
 
-    function appConfig($routeProvider, $httpProvider) {
+    function appConfig($httpProvider, $routeProvider) {
 
         //this is for CORS operations
         $httpProvider.defaults.useXDomain = true;
