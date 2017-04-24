@@ -4,8 +4,10 @@
 (function() {
     "use strict";
     var modules = ['ngRoute',
-    'watgFeedback.templates',
-    'watgRichtext',
-    'watgFileuploadModule'];
+        'watgFeedbackModule.templates',
+        'watgFeedbackModule.const',
+        'watgRichtextModule',
+        'watgFileuploadModule'
+    ];
     var watgFeedbackModule = angular.module('watgFeedbackModule', modules);
 }());

@@ -2,27 +2,37 @@
 <html lang="en">
 
 <head>
-   <meta charset="UTF-8">
-   <title></title>
+    <meta charset="UTF-8">
+    <title></title>
 </head>
-<script src="//cdn.rawgit.com/jpillora/xdomain/0.7.3/dist/xdomain.min.js"
-   slave="http://192.168.0.7/proxy.html"></script>
+<script src="//cdn.rawgit.com/jpillora/xdomain/0.7.3/dist/xdomain.min.js"></script>
+
+<script>
+    xdomain.slaves({
+        "http://localhost:6349": "/proxy.html"
+    });
+</script>
+
 <link href="http://192.168.0.7:8080/images/favicon.ico"
-   rel="shortcut icon" type="image/x-icon">
-<link href="../dev/css/vendor.min.css"
-   rel="stylesheet">
-<link href="../dev/css/watg-angular-feedback.css"
-   rel="stylesheet">
-<script src="../dev/js/vendor.min.js"></script>
-<script src="../dev/js/watg-angular-feedback.js"></script>
+    rel="shortcut icon"
+    type="image/x-icon">
+
+<link href="dev/css/vendor.min.css"
+    rel="stylesheet">
+
+<link href="dev/css/watg-angular-feedback.css"
+    rel="stylesheet">
+
+<script src="dev/js/vendor.min.js"></script>
+<script src="dev/js/watg-angular-feedback.js"></script>
 
 <body ng-app="watgFeedbackModule">
-   <div class="container">
-      <div class="well">
-         watg-angular-feedback directive
-         <div ng-view></div>
-      </div>
-   </div>
+    <div class="container">
+        <div class="well">
+            watg-angular-feedback directive
+            <div ng-view></div>
+        </div>
+    </div>
 </body>
 
 </html>

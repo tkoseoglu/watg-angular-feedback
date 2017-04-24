@@ -18,8 +18,8 @@
   ],
   "dependencies": {
     "angular": "*",
-    "watg-angular-richtext": "*",
-    "watg-angular-fileupload": "*"
+    "watg-angular-fileupload": "*",
+    "watg-angular-richtext": "1.1"
   },
   "devDependencies": {
     "jquery": "*",
@@ -27,5 +27,8 @@
     "bootstrap": "*",
     "fontawesome": "*",
     "toastr": "*"
+  },
+  "resolutions": {
+    "angular": "1.5.8"
   }
 }

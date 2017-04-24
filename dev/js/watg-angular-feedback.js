@@ -5,20 +5,20 @@
     "use strict";
     angular.module('watgFeedbackModule', [
         'ngRoute',
-        //'watgFeedback.templates',
-        "watgFeedbackModule.const",
-        'watgRichtext',
+        'watgFeedbackModule.const',
+        'watgRichtextModule',
         'watgFileuploadModule'
     ]);
 }());
-
 angular.module('watgFeedbackModule.const', [])
 
-.constant('CONST_WATGXRESTAPIURL', 'http://192.168.0.7/watgApi/api')
+.constant('CONST_WATGXRESTAPIURL', 'http://localhost:6349/api')
 
 .constant('CONST_RESOURCEURL', 'http://192.168.0.7:8080')
 
 .constant('CONST_LOGSENABLED', true)
+
+.constant('CONST_FEEDBACK_TEMPLATE_URL', 'src/app/directives/templates/watgFeedbackTemplate.html')
 
 ;
 (function() {
@@ -28,14 +28,19 @@ angular.module('watgFeedbackModule.const', [])
     app.run(appRun);
 
     function appConfig($routeProvider, $httpProvider) {
+
         //this is for CORS operations
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
         if (!$httpProvider.defaults.headers.get) {
             $httpProvider.defaults.headers.get = {};
         }
+
         //disable IE ajax request caching
-        $httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
+        $httpProvider.defaults.headers.common['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
+        $httpProvider.defaults.headers.common['Cache-Control'] = 'no-cache';
+        $httpProvider.defaults.headers.common['Pragma'] = 'no-cache';
+
         //routes
         $routeProvider.when('/test', {
             templateUrl: 'src/app/tests/watgFeedbackTestView.html',
@@ -47,7 +52,6 @@ angular.module('watgFeedbackModule.const', [])
 
     function appRun() {}
 })();
-
 (function() {
     "use strict";
     angular.module("watgFeedbackModule").controller("watgFeedbackTestController", ['$scope', '$window', 'CONST_WATGXRESTAPIURL', watgFeedbackTestController]);
@@ -86,10 +90,10 @@ angular.module('watgFeedbackModule.const', [])
 /**
  * Created by Kemal on 07/30/15.
  */
-(function () {
+(function() {
     "use strict";
-    angular.module("watgFeedbackModule").directive("watgFeedback", watgFeedback);
-    var controller = ['$scope', "watgFeedbackService", function ($scope, watgFeedbackService) {
+    angular.module("watgFeedbackModule").directive("watgFeedback", ['CONST_FEEDBACK_TEMPLATE_URL', watgFeedback]);
+    var controller = ['$scope', "watgFeedbackService", function($scope, watgFeedbackService) {
         var boostrapCssPath = "dev/css/vendor.min.css";
         $scope.header = 'Feedback';
         $scope.isBusySubmittingFeedback = false;
@@ -100,7 +104,7 @@ angular.module('watgFeedbackModule.const', [])
         $scope.stars = [];
         $scope.feebackContentResetCount = [];
         $scope.projectNotFound = false;
-        $scope.reset = function () {
+        $scope.reset = function() {
             $scope.appDevProjectUI = {
                 AppDevProjectId: 0,
                 AppDevProjectName: '',
@@ -148,10 +152,10 @@ angular.module('watgFeedbackModule.const', [])
                 showSourceCode: false
             };
         };
-        $scope.getAppDevProjectByProjectName = function () {
+        $scope.getAppDevProjectByProjectName = function() {
             $scope.isBusy = true;
             var url = $scope.watgApiUrl + '/Feedback/GetAppDevProjectByProjectName' + '/' + $scope.projectName;
-            watgFeedbackService.getAppDevProjectByProjectName(url).then(function (result) {
+            watgFeedbackService.getAppDevProjectByProjectName(url).then(function(result) {
                 $scope.isBusy = false;
                 if (result && result.AppDevProjectId !== undefined) {
                     $scope.projectNotFound = false;
@@ -159,8 +163,7 @@ angular.module('watgFeedbackModule.const', [])
                     $scope.appDevProjectUI.AppDevProjectName = result.AppDevProjectName;
                     $scope.appDevProjectUI.AppDevProjectDescription = result.AppDevProjectDescription;
                     $scope.appDevProjectUI.AppDevProjectVersion = result.AppDevProjectVersion;
-                }
-                else {
+                } else {
                     $scope.projectNotFound = true;
                     var email = {
                         subject: 'Application Feedback',
@@ -173,19 +176,18 @@ angular.module('watgFeedbackModule.const', [])
                         fromName: 'App Dev'
                     };
                     url = $scope.watgApiUrl + '/Common/SendEmailAPI';
-                    watgFeedbackService.sendEmail(email, url).then(function (result) {
+                    watgFeedbackService.sendEmail(email, url).then(function(result) {
                         if (result.HasError) {
                             console.error("Failed sending AppDev notification emails");
                             console.error(result.Message);
-                        }
-                        else {
+                        } else {
                             console.info("AppDev Email sent successfully");
                         }
                     });
                 }
             });
         };
-        $scope.submitAppDevProjectFeedback = function () {
+        $scope.submitAppDevProjectFeedback = function() {
             $scope.isBusySubmittingFeedback = true;
             $scope.appDevProjectUI.Vendor = navigator["vendor"];
             $scope.appDevProjectUI.Platform = navigator["platform"];
@@ -195,7 +197,7 @@ angular.module('watgFeedbackModule.const', [])
             if ($scope.urlReferrer) $scope.appDevProjectUI.FeedbackContent += "<br />(Previous page) " + $scope.urlReferrer;
             $scope.appDevProjectUI.Files = $scope.watgFileuploadConfig.Files;
             var url = $scope.watgApiUrl + '/Feedback/SubmitAppDevProjectFeedback';
-            watgFeedbackService.submitAppDevProjectFeedback($scope.appDevProjectUI, url).then(function (result) {
+            watgFeedbackService.submitAppDevProjectFeedback($scope.appDevProjectUI, url).then(function(result) {
                 var transactionResult = result;
                 if (transactionResult.HasError === true) console.error('Feedback Error ' + transactionResult.Message);
                 $scope.showConfirmation = true;
@@ -203,20 +205,20 @@ angular.module('watgFeedbackModule.const', [])
                 $scope.reset();
             });
         };
-        $scope.toggle = function (index) {
+        $scope.toggle = function(index) {
             $scope.ratingValue = index + 1;
         };
-        $scope.$watch('ratingValue', function (oldValue) {
+        $scope.$watch('ratingValue', function(oldValue) {
             if (oldValue) {
                 updateStars();
             }
         });
-        $scope.$watch('projectName', function (oldValue, newValue) {
+        $scope.$watch('projectName', function(oldValue, newValue) {
             if (newValue !== null && newValue !== "" && newValue !== undefined) {
                 $scope.getAppDevProjectByProjectName();
             }
         });
-        $scope.$watch('appDevProjectUI.FeedbackContent', function (newValue) {
+        $scope.$watch('appDevProjectUI.FeedbackContent', function(newValue) {
             if (newValue === "" || newValue === "<br>") $scope.form.inputForm.$setValidity("message", false);
             else $scope.form.inputForm.$setValidity("message", true);
         });
@@ -229,15 +231,15 @@ angular.module('watgFeedbackModule.const', [])
                 });
             }
         }
-        //$scope.getAppDevProjectByProjectName();
+
         $scope.reset();
         updateStars();
     }];
 
-    function watgFeedback() {
+    function watgFeedback(CONST_FEEDBACK_TEMPLATE_URL) {
         return {
             restrict: 'E',
-            templateUrl: 'src/app/directives/templates/watgFeedbackTemplate.html',
+            templateUrl: CONST_FEEDBACK_TEMPLATE_URL,
             scope: {
                 projectName: '=',
                 watgApiUrl: '=',
@@ -251,7 +253,10 @@ angular.module('watgFeedbackModule.const', [])
                 feedbackAttachmentImageMaxWidth: "=?"
             },
             controller: controller,
-            link: function (scope) {
+            link: function(scope) {
+
+                console.log("Template URL %s", CONST_FEEDBACK_TEMPLATE_URL);
+
                 if (!scope.feedbackInputHeight) scope.feedbackInputHeight = 100;
                 if (!scope.feedbackAttachmentMaxSize) scope.feedbackAttachmentMaxSize = (1024 * 1024) * 2;
                 if (!scope.feedbackAttachmentImageMaxHeight) scope.feedbackAttachmentImageMaxHeight = 1000;
@@ -268,7 +273,6 @@ angular.module('watgFeedbackModule.const', [])
         };
     }
 })();
-
 /**
  * Created by Kemal on 07/30/15.
  */

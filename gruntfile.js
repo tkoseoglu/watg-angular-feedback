@@ -1,37 +1,29 @@
 /**
  * Created by Kemal on 07/30/15.
  */
-var localServerAddress = "192.168.0.7"; //when server is VPNed into WATG
 module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         ngconstant: {
-            // Options for all targets
             options: {
                 space: " ",
                 dest: "src/app/core/app.const.js",
                 name: "watgFeedbackModule.const"
             },
-            // Environment targets
             dev: {
                 constants: {
-                    "CONST_WATGXRESTAPIURL": "http://" + localServerAddress + "/watgApi/api",
-                    "CONST_RESOURCEURL": "http://" + localServerAddress + ":8080",
-                    "CONST_LOGSENABLED": true
+                    "CONST_WATGXRESTAPIURL": "http://localhost:6349/api",
+                    "CONST_RESOURCEURL": "http://192.168.0.7:8080",
+                    "CONST_LOGSENABLED": true,
+                    "CONST_FEEDBACK_TEMPLATE_URL": "src/app/directives/templates/watgFeedbackTemplate.html"
                 }
             },
-            stage: {
+            dist: {
                 constants: {
-                    "CONST_WATGXRESTAPIURL": "http://itstage.watg.com/watgApi/api",
+                    "CONST_WATGXRESTAPIURL": "http://itworks.watg.com/watgApi/api",
                     "CONST_RESOURCEURL": "http://resources.watg.com",
-                    "CONST_LOGSENABLED": true
-                }
-            },
-            prod: {
-                constants: {
-                    "CONST_WATGXRESTAPIURL": "http://itworks.watg.com/watgxapirest/api",
-                    "CONST_RESOURCEURL": "http://resources.watg.com",
-                    "CONST_LOGSENABLED": false
+                    "CONST_LOGSENABLED": false,
+                    "CONST_FEEDBACK_TEMPLATE_URL": "app/directives/templates/watgFeedbackTemplate.html"
                 }
             }
         },
@@ -56,22 +48,23 @@ module.exports = function(grunt) {
             beforeconcat: ["gruntfile.js", "app/**/*.js"]
         },
         concat: {
-            appdist: {
-                src: ['src/app/appdist.js',
-                      'src/app/directives/watgFeedbackDirective.js',
-                      'src/app/services/watgFeedbackService.js'
-                ],
-                dest: 'dist/js/watg-angular-feedback.js'
-            },
-            app: {
+            dev: {
                 src: ['src/app/app.js',
-                      'src/app/core/app.const.js',
-                      'src/app/core/app.config.js',
-                      'src/app/tests/watgFeedbackTestController.js',
-                      'src/app/directives/watgFeedbackDirective.js',
-                      'src/app/services/watgFeedbackService.js'
+                    'src/app/core/app.const.js',
+                    'src/app/core/app.config.js',
+                    'src/app/tests/watgFeedbackTestController.js',
+                    'src/app/directives/watgFeedbackDirective.js',
+                    'src/app/services/watgFeedbackService.js'
                 ],
                 dest: 'dev/js/watg-angular-feedback.js'
+            },
+            dist: {
+                src: ['src/app/appdist.js',
+                    'src/app/core/app.const.js',
+                    'src/app/directives/watgFeedbackDirective.js',
+                    'src/app/services/watgFeedbackService.js'
+                ],
+                dest: 'dist/js/watg-angular-feedback.js'
             },
             vendor: {
                 src: [
@@ -80,9 +73,9 @@ module.exports = function(grunt) {
                     'bower_components/angular/angular.min.js',
                     'bower_components/angular-sanitize/angular-sanitize.min.js',
                     'bower_components/angular-route/angular-route.min.js',
-                    'bower_components/watg-angular-richtext/dist/js/watg-angular-richtext.min.js',
+                    'bower_components/watg-angular-richtext/dist/js/watg-angular-richtext.js',
                     'bower_components/watg-angular-richtext/dist/js/watg-angular-richtext.tpl.js',
-                    'bower_components/watg-angular-fileupload/dist/js/watg-angular-fileupload.min.js',
+                    'bower_components/watg-angular-fileupload/dist/js/watg-angular-fileupload.js',
                     'bower_components/watg-angular-fileupload/dist/js/watg-angular-fileupload.tpl.js'
                 ],
                 dest: 'dev/js/vendor.min.js'
@@ -93,23 +86,23 @@ module.exports = function(grunt) {
                 banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
                 mangle: false
             },
-            app: {
+            dev: {
                 files: {
                     'dev/js/watg-angular-feedback.min.js': ['dev/js/watg-angular-feedback.js']
                 }
             },
-            appdist: {
+            dist: {
                 files: {
                     'dist/js/watg-angular-feedback.min.js': ['dist/js/watg-angular-feedback.js']
                 }
             }
         },
         concat_css: {
-            assets: {
+            dev: {
                 src: ["src/assets/watg-angular-feedback.css"],
                 dest: "dev/css/watg-angular-feedback.css"
             },
-            assetsdist: {
+            dist: {
                 src: ["src/assets/watg-angular-feedback.css"],
                 dest: "dist/css/watg-angular-feedback.css"
             }
@@ -118,12 +111,12 @@ module.exports = function(grunt) {
             options: {
                 keepSpecialComments: 0
             },
-            assets: {
+            dev: {
                 files: {
                     'dev/css/watg-angular-feedback.min.css': ['dev/css/watg-angular-feedback.css']
                 }
             },
-            assetsdist: {
+            dist: {
                 files: {
                     'dist/css/watg-angular-feedback.min.css': ['dist/css/watg-angular-feedback.css']
                 }
@@ -144,8 +137,7 @@ module.exports = function(grunt) {
         },
         copy: {
             main: {
-                files: [
-                    {
+                files: [{
                         expand: true,
                         src: ['bower_components/fontawesome/fonts/*', 'bower_components/bootstrap/fonts/*'],
                         dest: 'dev/fonts/',
@@ -165,7 +157,7 @@ module.exports = function(grunt) {
         html2js: {
             options: {
                 base: 'src',
-                module: 'watgFeedback.templates',
+                module: 'watgFeedbackModule.templates',
                 singleModule: true,
                 useStrict: true,
                 htmlmin: {
@@ -195,6 +187,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.registerTask('dev', ['ngconstant:dev', "jshint", 'concat', 'uglify', 'concat_css', 'cssmin', 'copy', 'connect:dev', 'watch']); //, 'watch'
-    grunt.registerTask('dist', ['concat:appdist', 'uglify:appdist', 'concat_css:assetsdist', 'cssmin:assetsdist', 'copy', 'html2js']);
+    grunt.registerTask('dev', ["jshint", 'ngconstant:dev', 'concat:dev', 'uglify:dev', 'concat_css:dev', 'cssmin:dev', 'copy', 'connect:dev', 'watch']); //, 'watch'
+    grunt.registerTask('dist', ["jshint", 'ngconstant:dist', 'concat:dist', 'uglify:dist', 'concat_css:dist', 'cssmin:dist', 'copy', 'html2js']);
 };
