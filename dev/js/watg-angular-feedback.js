@@ -94,7 +94,7 @@ angular.module('watgFeedbackModule.const', [])
     "use strict";
     angular.module("watgFeedbackModule").directive("watgFeedback", ['CONST_FEEDBACK_TEMPLATE_URL', watgFeedback]);
     var controller = ['$scope', "watgFeedbackService", function($scope, watgFeedbackService) {
-        var boostrapCssPath = "dev/css/vendor.min.css";
+
         $scope.header = 'Feedback';
         $scope.isBusySubmittingFeedback = false;
         $scope.showConfirmation = false;
@@ -331,7 +331,7 @@ angular.module('watgFeedbackModule.const', [])
             controller: controller,
             link: function(scope) {
 
-                console.log("Template URL %s", CONST_FEEDBACK_TEMPLATE_URL);
+                console.log("Feedback Template URL %s", CONST_FEEDBACK_TEMPLATE_URL);
 
                 if (!scope.feedbackInputHeight) scope.feedbackInputHeight = 100;
                 if (!scope.feedbackAttachmentMaxSize) scope.feedbackAttachmentMaxSize = (1024 * 1024) * 2;
