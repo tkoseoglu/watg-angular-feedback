@@ -5,8 +5,9 @@
     "use strict";
     angular.module('watgFeedbackModule', [
         'ngRoute',
-        'watgFeedbackModule.const',
-        'watgRichtextModule',
-        'watgFileuploadModule'
+        'ngSanitize',
+        'watgFeedbackModule.const',        
+        'watgFileuploadModule',
+        'froala'
     ]);
 }());
