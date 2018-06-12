@@ -1,9 +1,9 @@
 {
   "name": "watg-angular-feedback",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "homepage": "https://github.com/tkoseoglu/watg-angular-feedback",
   "authors": [
-    "Tolga <tkoseoglu@live.com>"
+    "Tolga <tolga.k@outlook.com>"
   ],
   "main": "./dist/js/watg-angular-feedback.min.js",
   "description": "angularjs feedback module for WATG",
@@ -17,15 +17,20 @@
     "dev"
   ],
   "dependencies": {
-    "angular": "*",
-    "watg-angular-richtext": "*",
-    "watg-angular-fileupload": "*"
+    "angular": "1.5.8",
+    "jquery": "1.10.2",
+    "watg-angular-fileupload": "1.1",
+    "froala-wysiwyg-editor": "^2.7.6",
+    "angular-froala": "^2.7.6",
+    "angular-animate": "1.5.8"
   },
   "devDependencies": {
-    "jquery": "*",
-    "angular-route": "*",
-    "bootstrap": "*",
-    "fontawesome": "*",
-    "toastr": "*"
+    "angular-route": "1.5.8",
+    "bootstrap": "3.3.5",
+    "fontawesome": "~4.3.0",
+    "toastr": "~2.1.2"
+  },
+  "resolutions": {
+    "jquery": "1.10.2"
   }
 }

@@ -3,18 +3,40 @@
 
 <head>
    <meta charset="UTF-8">
-   <title></title>
+
+
+   <script id="fr-fek">
+      try {
+         (function (k) {
+            localStorage.FEK = k;
+            t = document.getElementById('fr-fek');
+            t.parentNode.removeChild(t);
+         })('xfsgsD1uxu==')
+      } catch (e) { }
+   </script>
+
+   <script src="http://localhost:52067/xdomain.js"></script>
+
+   <script>
+      xdomain.slaves({
+         "http://localhost:6349": "/proxy.html"
+      });
+   </script>
+
+
+   <link href="http://localhost:52067/images/favicon.ico"
+      rel="shortcut icon"
+      type="image/x-icon">
+
+   <title>watg-angular-feedback</title>
+
+   <link href="dev/css/vendor.min.css"
+      rel="stylesheet">
+
+   <link href="dev/css/watg-angular-feedback.css"
+      rel="stylesheet">
+
 </head>
-<script src="//cdn.rawgit.com/jpillora/xdomain/0.7.3/dist/xdomain.min.js"
-   slave="http://192.168.0.7/proxy.html"></script>
-<link href="http://192.168.0.7:8080/images/favicon.ico"
-   rel="shortcut icon" type="image/x-icon">
-<link href="../dev/css/vendor.min.css"
-   rel="stylesheet">
-<link href="../dev/css/watg-angular-feedback.css"
-   rel="stylesheet">
-<script src="../dev/js/vendor.min.js"></script>
-<script src="../dev/js/watg-angular-feedback.js"></script>
 
 <body ng-app="watgFeedbackModule">
    <div class="container">
@@ -24,5 +46,8 @@
       </div>
    </div>
 </body>
+
+<script src="dev/js/vendor.min.js"></script>
+<script src="dev/js/watg-angular-feedback.js"></script>
 
 </html>
