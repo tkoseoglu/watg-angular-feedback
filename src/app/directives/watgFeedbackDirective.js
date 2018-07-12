@@ -46,7 +46,7 @@
             }
          };
          $scope.editorOptions = {
-            placeholderText: 'Feedback',
+            placeholderText: 'Content',
             toolbarButtons: ['fontFamily', 'fontSize', 'color', '|', 'bold', 'italic', 'strikethrough', 'underline', '|', 'formatOL', 'formatUL', 'indent', 'outdent', 'align', 'undo', 'redo', 'insertLink'],
             charCounterCount: false,
             heightMin: 100

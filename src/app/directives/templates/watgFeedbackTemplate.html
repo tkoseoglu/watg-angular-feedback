@@ -1,25 +1,18 @@
-<div class="feedbackMainContent">
+<div class="feedbackMainContent"
+   ng-cloak>
    <h2>Feedback</h2>
    <div ng-show="isBusy">
-      Loading...
+      Preparing page...
       <i class="fa fa-refresh fa-spin"></i>
    </div>
    <div ng-hide="isBusy">
+
       <form name="form.inputForm"
+         class="feedbackForm"
          novalidate
-         ng-cloak
          ng-hide="showConfirmation || projectNotFound">
          <div class="form-group">
-            <div>
-               Application Name
-            </div>
-            <div>
-               <strong>{{appDevProjectUI.AppDevProjectName}} {{appDevProjectUI.AppDevProjectVersion}}
-               </strong>
-            </div>
-         </div>
-         <div class="form-group">
-            <div>Application Details</div>
+            <div>{{appDevProjectUI.AppDevProjectName}} ({{appDevProjectUI.AppDevProjectVersion}}) Description</div>
             <div>
                <strong>{{appDevProjectUI.AppDevProjectDescription}}</strong>
             </div>
@@ -32,14 +25,6 @@
             <div froala="editorOptions"
                ng-model="appDevProjectUI.FeedbackContent"
                required></div>
-            <!-- <div>
-               <watg-richtext-editor id="'feedbackContent'"
-                  name="feedbackContent"
-                  output="appDevProjectUI.FeedbackContent"
-                  config="feedbackRichtextConfig"
-                  reset-count="feebackContentResetCount"
-                  required></watg-richtext-editor>
-            </div> -->
          </div>
          <div class="form-group">
             <div>
@@ -60,7 +45,9 @@
             ng-class="{'has-error': form.inputForm.file.$invalid}">
             <watg-fileupload config="watgFileuploadConfig"></watg-fileupload>
          </div>
+
          <hr/>
+
          <div class="form-group">
             <div class="pull-right">
                <button class="btn btn-primary"
@@ -75,11 +62,13 @@
             <br/>
          </div>
       </form>
+
       <div ng-show="showConfirmation">
          <h3>Thank you!
             <small>Your feedback has been successfully recorded.</small>
          </h3>
       </div>
+
       <div ng-show="projectNotFound">
          <h3>Oops! Something went wrong</h3>
          <div class="alert alert-danger">
