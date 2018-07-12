@@ -1,73 +1,77 @@
 .star-rating {
-    margin: 0;
-    padding: 0;
-    display: inline-block;
+   margin: 0;
+   padding: 0;
+   display: inline-block;
 }
 
 .star-rating .star {
-    padding: 1px;
-    color: #ddd;
-    font-size: 20px;
-    text-shadow: .05em .05em #aaa;
-    list-style-type: none;
-    display: inline-block;
-    cursor: pointer;
+   padding: 1px;
+   color: #ddd;
+   font-size: 20px;
+   text-shadow: .05em .05em #aaa;
+   list-style-type: none;
+   display: inline-block;
+   cursor: pointer;
 }
 
 .star-rating .star.filled {
-    color: #fd0;
+   color: #fd0;
 }
 
 .star-rating.readonly .star.filled {
-    color: #666;
+   color: #666;
 }
 
 .feedbackMainContent {
-    margin-left: 20px;
-    margin-right: 20px;
-    overflow-x: hidden;
+   margin-left: 20px;
+   margin-right: 20px;
+   overflow-x: hidden;
+}
+
+.feedbackForm {
+   padding: 5px;
 }
 
 .btn-file {
-    position: relative;
-    overflow: hidden;
+   position: relative;
+   overflow: hidden;
 }
 
 .btn-file input[type=file] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 100%;
-    min-height: 100%;
-    font-size: 100px;
-    text-align: right;
-    filter: alpha(opacity=0);
-    opacity: 0;
-    outline: none;
-    background: white;
-    cursor: inherit;
-    display: block;
+   position: absolute;
+   top: 0;
+   right: 0;
+   min-width: 100%;
+   min-height: 100%;
+   font-size: 100px;
+   text-align: right;
+   filter: alpha(opacity=0);
+   opacity: 0;
+   outline: none;
+   background: white;
+   cursor: inherit;
+   display: block;
 }
 
 .attachedFileRow {
-    height: 25px;
-    width: 100%;
-    margin: 3px 0;
-    clear: both;
+   height: 25px;
+   width: 100%;
+   margin: 3px 0;
+   clear: both;
 }
 
 .attachedFileRow DIV {
-    float: left;
-    margin-right: 5px;
+   float: left;
+   margin-right: 5px;
 }
 
 .attachedFileRow SPAN {
-    width: 200px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+   width: 200px;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
 }
 
 .idosomething {
-    cursor: pointer;
+   cursor: pointer;
 }
