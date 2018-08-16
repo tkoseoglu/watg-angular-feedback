@@ -22,6 +22,12 @@
       "url": "https://github.com/tkoseoglu/watg-angular-feedback/issues"
    },
    "homepage": "https://github.com/tkoseoglu/watg-angular-feedback",
+   "dependencies": {
+      "angular": "^1.5.8",
+      "angular-route": "^1.5.8",
+      "angular-sanitize": "^1.5.8",
+      "watg-angular-fileupload": "^2.0.7"
+   },
    "devDependencies": {
       "bootstrap": "^3.3.5",
       "bower-files": "^3.7.0",
@@ -38,11 +44,5 @@
       "grunt-html2js": "^0.5.1",
       "grunt-ng-constant": "^1.1.0",
       "lite-server": "^2.4.0"
-   },
-   "dependencies": {
-      "angular": "^1.5.8",
-      "angular-route": "^1.5.8",
-      "angular-sanitize": "^1.5.8",
-      "watg-angular-fileupload": "^2.0.7"
    }
 }
