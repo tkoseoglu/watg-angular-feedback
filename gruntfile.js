@@ -52,9 +52,9 @@ module.exports = function (grunt) {
             src: ['src/app/app.js',
                'src/app/core/app.const.js',
                'src/app/core/app.config.js',
-               'src/app/tests/watgFeedbackTestController.js',
                'src/app/directives/watgFeedbackDirective.js',
-               'src/app/services/watgFeedbackService.js'
+               'src/app/services/watgFeedbackService.js',
+               'src/app/tests/watgFeedbackTestController.js'
             ],
             dest: 'dev/js/watg-angular-feedback.js'
          },
@@ -68,18 +68,40 @@ module.exports = function (grunt) {
          },
          vendor: {
             src: [
+
+               'node_modules/angular/angular.js',
+               'node_modules/angular-sanitize/angular-sanitize.js',
+               'node_modules/angular-animate/angular-animate.js',
+               'node_modules/angular-route/angular-route.js',
+
+               'bower_components/jquery/jquery.js',
+               'node_modules/bootstrap/dist/js/bootstrap.js',
+               'bower_components/froala-wysiwyg-editor/js/froala_editor.js',
+               'bower_components/angular-froala/src/angular-froala.js',
+               'bower_components/froala-wysiwyg-editor/js/plugins/**.js',
+
+
+               'node_modules/watg-angular-fileupload/dist/js/watg-angular-fileupload.js',
+               'node_modules/watg-angular-fileupload/dist/js/watg-angular-fileupload.tpl.js'
+            ],
+            dest: 'dev/js/vendor.min.js'
+         },
+         vendorDist: {
+            src: [
+
+               'node_modules/angular/angular.min.js',
+               'node_modules/angular-sanitize/angular-sanitize.min.js',
+               'node_modules/angular-animate/angular-animate.min.js',
+               'node_modules/angular-route/angular-route.min.js',
+
                'bower_components/jquery/jquery.min.js',
-               'bower_components/bootstrap/dist/js/bootstrap.min.js',
-               'bower_components/angular/angular.min.js',
-               'bower_components/angular-sanitize/angular-sanitize.min.js',
-               'bower_components/angular-animate/angular-animate.min.js',
-               'bower_components/angular-route/angular-route.min.js',
-               "bower_components/froala-wysiwyg-editor/js/froala_editor.min.js",
-               "bower_components/angular-froala/src/angular-froala.js",
-               "bower_components/froala-wysiwyg-editor/js/plugins/**.min.js",
+               'node_modules/bootstrap/dist/js/bootstrap.min.js',
+               'bower_components/froala-wysiwyg-editor/js/froala_editor.min.js',
+               'bower_components/angular-froala/src/angular-froala.js',
+               'bower_components/froala-wysiwyg-editor/js/plugins/**.min.js',
 
                'node_modules/watg-angular-fileupload/dist/js/watg-angular-fileupload.min.js',
-               'node_modules/watg-angular-fileupload/dist/js/watg-angular-fileupload.tpl.js'               
+               'node_modules/watg-angular-fileupload/dist/js/watg-angular-fileupload.tpl.js'
             ],
             dest: 'dev/js/vendor.min.js'
          }
@@ -127,8 +149,8 @@ module.exports = function (grunt) {
          vendor: {
             files: {
                'dev/css/vendor.min.css': [
-                  'bower_components/bootstrap/dist/css/bootstrap.css',
-                  'bower_components/fontawesome/css/font-awesome.css',
+                  'node_modules/bootstrap/dist/css/bootstrap.css',
+                  'node_modules/font-awesome/css/font-awesome.css',
                   "bower_components/froala-wysiwyg-editor/css/froala_editor.min.css",
                   "bower_components/froala-wysiwyg-editor/css/froala_style.min.css",
                   "bower_components/froala-wysiwyg-editor/css/plugins/**.min.css"

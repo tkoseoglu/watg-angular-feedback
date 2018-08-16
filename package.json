@@ -1,6 +1,6 @@
 {
    "name": "watg-angular-feedback",
-   "version": "7.12.2018",
+   "version": "2.0.1",
    "description": "angularjs feedback module for WATG",
    "keywords": [
       "angularjs",
@@ -23,7 +23,9 @@
    },
    "homepage": "https://github.com/tkoseoglu/watg-angular-feedback",
    "devDependencies": {
+      "bootstrap": "^3.3.5",
       "bower-files": "^3.7.0",
+      "font-awesome": "^4.7.0",
       "grunt": "^0.4.5",
       "grunt-concat-css": "^0.3.1",
       "grunt-contrib-concat": "^0.5.1",
@@ -38,6 +40,9 @@
       "lite-server": "^2.4.0"
    },
    "dependencies": {
-      "watg-angular-fileupload": "^2.0.6"
+      "angular": "^1.5.8",
+      "angular-route": "^1.5.8",
+      "angular-sanitize": "^1.5.8",
+      "watg-angular-fileupload": "^2.0.7"
    }
 }

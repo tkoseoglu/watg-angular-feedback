@@ -37,6 +37,7 @@
          };
          $scope.watgFileuploadConfig = {
             Title: "Attachments",
+            id: "attachmentUpload",
             Files: [],
             MaxFileSize: 1024 * 1024 * 5,
             MaxNumberOfFiles: 5,
