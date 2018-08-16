@@ -74,12 +74,12 @@ module.exports = function (grunt) {
                'bower_components/angular-sanitize/angular-sanitize.min.js',
                'bower_components/angular-animate/angular-animate.min.js',
                'bower_components/angular-route/angular-route.min.js',
-               'bower_components/watg-angular-fileupload/dist/js/watg-angular-fileupload.js',
-               'bower_components/watg-angular-fileupload/dist/js/watg-angular-fileupload.tpl.js',
-
                "bower_components/froala-wysiwyg-editor/js/froala_editor.min.js",
                "bower_components/angular-froala/src/angular-froala.js",
-               "bower_components/froala-wysiwyg-editor/js/plugins/**.min.js"
+               "bower_components/froala-wysiwyg-editor/js/plugins/**.min.js",
+
+               'node_modules/watg-angular-fileupload/dist/js/watg-angular-fileupload.min.js',
+               'node_modules/watg-angular-fileupload/dist/js/watg-angular-fileupload.tpl.js'               
             ],
             dest: 'dev/js/vendor.min.js'
          }

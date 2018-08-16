@@ -7,7 +7,7 @@
         'ngRoute',
         'ngSanitize',
         'watgFeedbackModule.const',        
-        'watgFileuploadModule',
+        //'watgFileuploadModule',
         'froala'
     ]);
 }());

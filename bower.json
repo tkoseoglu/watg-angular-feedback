@@ -1,36 +1,41 @@
 {
-  "name": "watg-angular-feedback",
-  "version": "7.12.2018",
-  "homepage": "https://github.com/tkoseoglu/watg-angular-feedback",
-  "authors": [
-    "Tolga <tolga.k@outlook.com>"
-  ],
-  "main": "./dist/js/watg-angular-feedback.min.js",
-  "description": "angularjs feedback module for WATG",
-  "license": "MIT",
-  "ignore": [
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests",
-    "src",
-    "dev"
-  ],
-  "dependencies": {
-    "angular": "1.5.8",
-    "jquery": "1.10.2",
-    "watg-angular-fileupload": "1.1",
-    "froala-wysiwyg-editor": "^2.7.6",
-    "angular-froala": "^2.7.6",
-    "angular-animate": "1.5.8"
-  },
-  "devDependencies": {
-    "angular-route": "1.5.8",
-    "bootstrap": "3.3.5",
-    "fontawesome": "~4.3.0",
-    "toastr": "~2.1.2"
-  },
-  "resolutions": {
-    "jquery": "1.10.2"
-  }
+   "name": "watg-angular-feedback",
+   "version": "7.12.2018",
+   "homepage": "https://github.com/tkoseoglu/watg-angular-feedback",
+   "authors": [
+      "Tolga <tolga.k@outlook.com>"
+   ],
+   "main": "./dist/js/watg-angular-feedback.min.js",
+   "description": "angularjs feedback module for WATG",
+   "keywords": [
+      "angularjs",
+      "feedback",
+      "directive",
+      "watg"
+   ],
+   "license": "MIT",
+   "ignore": [
+      "node_modules",
+      "bower_components",
+      "test",
+      "tests",
+      "src",
+      "dev"
+   ],
+   "dependencies": {
+      "angular": "1.5.8",
+      "jquery": "1.10.2",
+      "froala-wysiwyg-editor": "^2.7.6",
+      "angular-froala": "^2.7.6",
+      "angular-animate": "1.5.8"
+   },
+   "devDependencies": {
+      "angular-route": "1.5.8",
+      "bootstrap": "3.3.5",
+      "fontawesome": "~4.3.0",
+      "toastr": "~2.1.2"
+   },
+   "resolutions": {
+      "jquery": "1.10.2"
+   }
 }
