@@ -23,13 +23,13 @@
    },
    "homepage": "https://github.com/tkoseoglu/watg-angular-feedback",
    "dependencies": {
-      "angular": "^1.5.8",
+      "angular": "^1.8.2",
       "angular-route": "^1.5.8",
       "angular-sanitize": "^1.5.8",
       "watg-angular-fileupload": "^2.0.7"
    },
    "devDependencies": {
-      "bootstrap": "^3.3.5",
+      "bootstrap": "^3.4.1",
       "bower-files": "^3.7.0",
       "font-awesome": "^4.7.0",
       "grunt": "^0.4.5",
@@ -41,8 +41,8 @@
       "grunt-contrib-jshint": "^0.12.0",
       "grunt-contrib-uglify": "^0.9.1",
       "grunt-contrib-watch": "^0.6.1",
-      "grunt-html2js": "^0.5.1",
+      "grunt-html2js": "^0.7.1",
       "grunt-ng-constant": "^1.1.0",
-      "lite-server": "^2.4.0"
+      "lite-server": "^2.6.1"
    }
 }
